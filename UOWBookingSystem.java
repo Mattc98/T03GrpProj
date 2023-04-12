@@ -292,15 +292,34 @@ class UOWBookingSystem {
         System.out.println("Select a room");
         System.out.print(".............\n");
 
-        int roomSelected = 0;
+        int roomSelected;
         roomSelected = input.nextInt();
 
         if (roomList.get(roomSelected - 1).getBooked() == "Vacant" && roomList.get(roomSelected - 1).getAvailability() == "Available" ) {
+
+            System.out.print("----------------------\n");
+            System.out.println("Do you have a Promo Code?");
+            System.out.print(".............\n");
+
+            input.next();
+            String promo;
+            promo = input.nextLine();
+            if(roomList.get(roomSelected - 1).getPromocode() == promo){
+                double discountedPrice = roomList.get(roomSelected - 1).getPricing() * 0.8;
+                System.out.print("----------------------\n");
+                System.out.printf("Room price after discount is %.2f%n", discountedPrice);
+            }
+            else{
+                System.out.printf("Room price without discount is %.2f%n", roomList.get(roomSelected - 1).getPricing());
+            }
+
             roomList.get(roomSelected - 1).setBooked("Occupied");
             occupiedRoomList.add(roomList.get(roomSelected - 1));
             System.out.print("----------------------\n");
             System.out.println("Room booked successfully");
+
             studentMenu();
+
         } else {
             System.out.print("----------------------\n");
             System.out.printf("Room is already occupied or its unavailable for booking%nPlease select another room%n");
