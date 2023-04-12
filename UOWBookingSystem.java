@@ -7,11 +7,12 @@ class UOWBookingSystem {
     private static ArrayList<Room> roomList = new ArrayList<Room>();
 
     private static void firstMenu() {
-        System.out.println("\nAre you a UOWStaff or UOW student?");
+        System.out.println("----------------------");
+        System.out.println("Are you a UOWStaff or UOW student?");
         System.out.println("1.UOWStaff");
         System.out.println("2.UOWStudent");
         System.out.println("3.Exit");
-        System.out.print("----------------------\n");
+        System.out.print(".............\n");
 
         try {
             input = new Scanner(System.in);
@@ -44,7 +45,7 @@ class UOWBookingSystem {
         System.out.println("1.Create a room.");
         System.out.println("2.Edit room details");
         System.out.println("3.Log out");
-        System.out.print("----------------------\n");
+        System.out.print(".............\n");
 
         try{     
             int staffOption = 0;
@@ -147,6 +148,8 @@ class UOWBookingSystem {
         }
 
         System.out.println("Select a room");
+        System.out.print(".............\n");
+
         int roomSelected = 0;
         roomSelected = input.nextInt();
 
@@ -154,9 +157,9 @@ class UOWBookingSystem {
         System.out.println("1.Edit room availability");
         System.out.println("2.Edit room pricing");
         System.out.println("3.Edit room timing");
-        System.out.println("4.edit promocode for room");
+        System.out.println("4.Edit promocode for room");
         System.out.println("5.Edit room Capacity");
-        System.out.print("----------------------\n");
+        System.out.print(".............\n");
 
         int option = 0;
         input = new Scanner(System.in);
@@ -240,7 +243,7 @@ class UOWBookingSystem {
         System.out.println("3.Edit room booking");
         System.out.println("4.Delete room booking");
         System.out.println("5.Log out");
-        System.out.print("----------------------\n");
+        System.out.print(".............\n");
 
         try{
             int studentOption;
@@ -283,11 +286,14 @@ class UOWBookingSystem {
         }
 
         System.out.println("Select a room");
+        System.out.print(".............\n");
+
         int roomSelected = 0;
         roomSelected = input.nextInt();
 
         if (roomList.get(roomSelected - 1).getBooked() == "Vacant") {
             roomList.get(roomSelected - 1).setBooked("Occupied");
+            System.out.print("----------------------\n");
             System.out.println("Room booked successfully");
             firstMenu();
         } else {
