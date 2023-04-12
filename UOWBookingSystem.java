@@ -1,50 +1,74 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 class UOWBookingSystem {
     private static Scanner input;
     private static ArrayList<Room> roomList = new ArrayList<Room>();
 
     private static void firstMenu() {
-        int userSelection = 0;
         System.out.println("\nAre you a UOWStaff or UOW student?");
         System.out.println("1.UOWStaff");
         System.out.println("2.UOWStudent");
         System.out.println("3.Exit");
         System.out.print("----------------------\n");
-        input = new Scanner(System.in);
-        userSelection = input.nextInt();
 
-        switch (userSelection) {
-            case 1:
-                staffMenu();
-            case 2:
-                studentMenu();
-            case 3:
-                System.exit(0);
-            default:
-                System.exit(0);
+        try {
+            input = new Scanner(System.in);
+            int userSelection;
+            userSelection = input.nextInt();
+            switch (userSelection) {
+                case 1:
+                    staffMenu();
+                case 2:
+                    studentMenu();
+                case 3:
+                    System.exit(0);
+            }
+
+            if (userSelection > 3 || userSelection < 1) {
+                System.out.println("\nEnter a number between 1 and 3\n");
+                firstMenu();
+            }
+
+        } catch (InputMismatchException e) {
+            System.out.println("\nplease enter number");
+            firstMenu();
         }
-
     }
 
     private static void staffMenu() {
+        System.out.println("----------------------");
+        System.out.println("==> Staff Menu");
         System.out.print("----------------------\n");
         System.out.println("1.Create a room.");
         System.out.println("2.Edit room details");
+        System.out.println("3.Log out");
         System.out.print("----------------------\n");
 
-        int staffOption = 0;
-        input = new Scanner(System.in);
-        staffOption = input.nextInt();
+        try{     
+            int staffOption = 0;
+            input = new Scanner(System.in);
+            staffOption = input.nextInt();
 
-        switch (staffOption) {
-            case 1:
-                roomCreationMenu();
-            case 2:
-                roomEditMenu();
-            default:
-                System.exit(0);
+            switch (staffOption) {
+                case 1:
+                    roomCreationMenu();
+                case 2:
+                    roomEditMenu();
+                case 3:
+                    firstMenu();
+                default:
+                    System.exit(0);
+            }
+            if (staffOption > 3 || staffOption < 1) {
+                System.out.println("\nEnter a number between 1 and 3\n");
+                staffMenu();
+            }
+            
+        }catch(InputMismatchException e) {
+            System.out.println("\nplease enter number");
+            staffMenu();
         }
     }
 
@@ -109,13 +133,7 @@ class UOWBookingSystem {
 
         roomList.add(room);
 
-        for (int i = 0; i < roomList.size(); i++) {
-            System.out.printf("%nRoom %d is %s ", i + 1, roomList.get(i).getAvailability());
-            System.out.println(roomList.get(i));
-            System.out.print("----------------------\n");
-        }
-
-        firstMenu();
+        staffMenu();
 
     }
 
@@ -157,7 +175,7 @@ class UOWBookingSystem {
                 } else if (a == 2) {
                     roomList.get(roomSelected - 1).setAvailability("Unavailable");
                 }
-                firstMenu();
+                staffMenu();
 
             case 2:
                 System.out.print("----------------------\n");
@@ -166,7 +184,7 @@ class UOWBookingSystem {
 
                 double price = input.nextDouble();
                 roomList.get(roomSelected - 1).setPricing(price);
-                firstMenu();
+                staffMenu();
 
             case 3:
                 System.out.print("----------------------\n");
@@ -190,7 +208,7 @@ class UOWBookingSystem {
                 } else if (t == 5) {
                     roomList.get(roomSelected - 1).setTiming("4:00 PM - 6:00 PM");
                 }
-                firstMenu();
+                staffMenu();
 
             case 4:
                 System.out.print("----------------------\n");
@@ -200,7 +218,7 @@ class UOWBookingSystem {
                 input.next();
                 String PC = input.nextLine();
                 roomList.get(roomSelected - 1).setPromocode(PC);
-                firstMenu();
+                staffMenu();
 
             case 5:
                 System.out.print("----------------------\n");
@@ -209,35 +227,50 @@ class UOWBookingSystem {
 
                 int c = input.nextInt();
                 roomList.get(roomSelected - 1).setCapacity(c);
-                firstMenu();
+                staffMenu();
         }
     }
 
     private static void studentMenu() {
+        System.out.println("----------------------");
+        System.out.println("==> Student Menu");
         System.out.print("----------------------\n");
         System.out.println("1.View Room List");
         System.out.println("2.Make a room booking");
         System.out.println("3.Edit room booking");
         System.out.println("4.Delete room booking");
+        System.out.println("5.Log out");
         System.out.print("----------------------\n");
-        int studentOption = 0;
-        input = new Scanner(System.in);
-        studentOption = input.nextInt();
 
-        switch (studentOption) {
-            case 1:
-                for (int i = 0; i < roomList.size(); i++) {
-                    System.out.printf("%nRoom %d is %s ", i + 1, roomList.get(i).getAvailability());
-                    System.out.println(roomList.get(i));
-                    System.out.print("----------------------\n");
-                }
+        try{
+            int studentOption;
+            input = new Scanner(System.in);
+            studentOption = input.nextInt();
+
+            switch (studentOption) {
+                case 1:
+                    for (int i = 0; i < roomList.size(); i++) {
+                        System.out.printf("%nRoom %d is %s ", i + 1, roomList.get(i).getAvailability());
+                        System.out.println(roomList.get(i));
+                        System.out.print("----------------------\n");
+                    }
+                    studentMenu();
+
+                case 2:
+                    bookingMenu();
+
+                case 5:
+                    firstMenu();
+
+            }
+
+            if (studentOption > 5 || studentOption < 1) {
+                System.out.println("\nEnter a number between 1 and 5\n");
                 studentMenu();
-
-            case 2:
-                bookingMenu();
-
-            case 3:
-
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("\nplease enter number");
+            studentMenu();
         }
 
     }
@@ -266,7 +299,6 @@ class UOWBookingSystem {
     public static void main(String[] args) {
 
         firstMenu();
-
     }
 }
 
