@@ -5,6 +5,8 @@ import java.util.InputMismatchException;
 class UOWBookingSystem {
     private static Scanner input;
     private static ArrayList<Room> roomList = new ArrayList<Room>();
+    private static ArrayList<Room> occupiedRoomList = new ArrayList<Room>();
+
 
     private static void firstMenu() {
         System.out.println("----------------------");
@@ -240,9 +242,8 @@ class UOWBookingSystem {
         System.out.print("----------------------\n");
         System.out.println("1.View Room List");
         System.out.println("2.Make a room booking");
-        System.out.println("3.Edit room booking");
-        System.out.println("4.Delete room booking");
-        System.out.println("5.Log out");
+        System.out.println("3.Delete room booking");
+        System.out.println("4.Log out");
         System.out.print(".............\n");
 
         try{
@@ -262,13 +263,16 @@ class UOWBookingSystem {
                 case 2:
                     bookingMenu();
 
-                case 5:
+                case 3:
+                    roomRemoval();
+
+                case 4:
                     firstMenu();
 
             }
 
             if (studentOption > 5 || studentOption < 1) {
-                System.out.println("\nEnter a number between 1 and 5\n");
+                System.out.println("\nEnter a number between 1 and 4\n");
                 studentMenu();
             }
         } catch (InputMismatchException e) {
@@ -291,19 +295,39 @@ class UOWBookingSystem {
         int roomSelected = 0;
         roomSelected = input.nextInt();
 
-        if (roomList.get(roomSelected - 1).getBooked() == "Vacant") {
+        if (roomList.get(roomSelected - 1).getBooked() == "Vacant" && roomList.get(roomSelected - 1).getAvailability() == "Available" ) {
             roomList.get(roomSelected - 1).setBooked("Occupied");
+            occupiedRoomList.add(roomList.get(roomSelected - 1));
             System.out.print("----------------------\n");
             System.out.println("Room booked successfully");
-            firstMenu();
+            studentMenu();
         } else {
-            System.out.printf("Room is already occupied%nPlease Select another room");
+            System.out.print("----------------------\n");
+            System.out.printf("Room is already occupied or its unavailable for booking%nPlease select another room%n");
+            System.out.print("----------------------\n");
             bookingMenu();
         }
     }
 
-    public static void main(String[] args) {
+    private static void roomRemoval(){
+        for (int i = 0; i < roomList.size(); i++) {
+            System.out.printf("%nRoom %d is %s ", i + 1, occupiedRoomList.get(i).getAvailability());
+            System.out.println(occupiedRoomList.get(i));
+            System.out.print("----------------------\n");
+        }
 
+        System.out.println("Select a room");
+        System.out.print(".............\n");
+
+        int roomSelected;
+        roomSelected = input.nextInt();
+
+        occupiedRoomList.get(roomSelected - 1).setBooked("Vacant");
+        occupiedRoomList.remove(roomSelected -1);
+        studentMenu();
+    }
+
+    public static void main(String[] args) {
         firstMenu();
     }
 }
