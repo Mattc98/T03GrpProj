@@ -145,7 +145,7 @@ class Demo extends JFrame{
         loginPage.add(exitB);
 
         JFrame staffMenu = new JFrame("Welcome to my booking system");
-        staffMenu.setSize(650, 400);
+        staffMenu.setSize(450, 250);
         JPanel staffPanel = new JPanel();
 
         staffPanel.setLayout(new BoxLayout(staffPanel ,BoxLayout.Y_AXIS));
@@ -157,8 +157,11 @@ class Demo extends JFrame{
         JButton editRoomButton = new JButton("Edit Existing Room");
         JButton logoutStaffButton = new JButton("Log out");
 
+        JFrame creatingMenu = new JFrame("Creating new room for booking");
+        JFrame editMenu = new JFrame("Editing existing room for booking");
+
         JFrame studentMenu = new JFrame("Welcome to my booking system");
-        studentMenu.setSize(650, 400);
+        studentMenu.setSize(450, 400);
 
         JPanel studentPanel = new JPanel();
         studentMenu.add(studentPanel);
@@ -175,8 +178,13 @@ class Demo extends JFrame{
                 staffPanel.setBackground(Color.darkGray);
 
                 header.setForeground(Color.white);
-                header.setText("==> Staff Menu");
+                header.setText("~~~ Staff Menu ~~~");
                 staffPanel.add(header);  
+
+                header.setAlignmentX(Component.CENTER_ALIGNMENT);
+                createRoomButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+                editRoomButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+                logoutStaffButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
                 staffPanel.add(createRoomButton);
                 staffPanel.add(editRoomButton);
@@ -185,6 +193,33 @@ class Demo extends JFrame{
 
                 this.setVisible(false);
                 staffMenu.setVisible(true);
+            }
+        });
+
+        createRoomButton.addActionListener(e -> {
+            // if button is clicked
+            if (e.getSource() == createRoomButton) {
+
+                staffMenu.setVisible(false);
+                creatingMenu.setVisible(true);
+            }
+        });
+
+        editRoomButton.addActionListener(e -> {
+            // if button is clicked
+            if (e.getSource() == editRoomButton) {
+
+                staffMenu.setVisible(false);
+                editMenu.setVisible(true);
+            }
+        });
+
+        logoutStaffButton.addActionListener(e -> {
+            // if button is clicked
+            if (e.getSource() == logoutStaffButton) {
+
+                staffMenu.setVisible(false);
+                this.setVisible(true);
             }
         });
 
