@@ -7,10 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Color;
@@ -141,21 +144,45 @@ class Demo extends JFrame{
         JButton exitB = new JButton("Exit");
         loginPage.add(exitB);
 
-        JFrame staffMenu = new JFrame("Staff Menu");
+        JFrame staffMenu = new JFrame("Welcome to my booking system");
         staffMenu.setSize(650, 400);
-
         JPanel staffPanel = new JPanel();
+
+        staffPanel.setLayout(new BoxLayout(staffPanel ,BoxLayout.Y_AXIS));
         staffMenu.add(staffPanel);
 
-        JFrame studentMenu = new JFrame("Student Menu");
+        JLabel header = new JLabel();
+        
+        JButton createRoomButton = new JButton("Create New Room");
+        JButton editRoomButton = new JButton("Edit Existing Room");
+        JButton logoutStaffButton = new JButton("Log out");
+
+        JFrame studentMenu = new JFrame("Welcome to my booking system");
         studentMenu.setSize(650, 400);
 
         JPanel studentPanel = new JPanel();
         studentMenu.add(studentPanel);
 
+
         staffB.addActionListener(e -> {
             // if button is clicked
             if (e.getSource() == staffB) {
+
+                staffMenu.add(b1, BorderLayout.NORTH);
+                staffMenu.add(b2, BorderLayout.SOUTH);
+                staffMenu.add(b3, BorderLayout.EAST);
+                staffMenu.add(b4, BorderLayout.WEST);
+                staffPanel.setBackground(Color.darkGray);
+
+                header.setForeground(Color.white);
+                header.setText("==> Staff Menu");
+                staffPanel.add(header);  
+
+                staffPanel.add(createRoomButton);
+                staffPanel.add(editRoomButton);
+                staffPanel.add(logoutStaffButton);
+
+
                 this.setVisible(false);
                 staffMenu.setVisible(true);
             }
@@ -164,8 +191,17 @@ class Demo extends JFrame{
         studentB.addActionListener(e -> {
             // if button is clicked
             if (e.getSource() == studentB) {
+
                 this.setVisible(false);
                 studentMenu.setVisible(true);
+
+
+            }
+        });
+
+        exitB.addActionListener(e -> {
+            if (e.getSource() == exitB) {
+                System.exit(0);
             }
         });
 
@@ -177,7 +213,7 @@ class UOWBookingSystem2{
         Demo hehe = new Demo();
 
         hehe.setVisible(true);
-        hehe.setSize(620, 500);
+        hehe.setSize(570, 500);
         hehe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
