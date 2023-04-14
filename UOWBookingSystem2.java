@@ -3,12 +3,7 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.Scanner;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -158,6 +153,32 @@ class Demo extends JFrame{
         JButton logoutStaffButton = new JButton("Log out");
 
         JFrame creatingMenu = new JFrame("Creating new room for booking");
+        creatingMenu.setSize(450, 250);
+
+        JPanel creatingPanel = new JPanel();
+        creatingPanel.setLayout(new BoxLayout(creatingPanel,BoxLayout.Y_AXIS));
+        creatingMenu.add(creatingPanel);
+        //creatingPanel.setBackground(Color.darkGray);
+
+        JLabel header1 = new JLabel();
+        //header1.setForeground(Color.white);
+        header1.setText("~~~ Settings for New Room ~~~");
+        creatingPanel.add(header1);
+
+
+        JRadioButton ava = new JRadioButton("Available");
+        JRadioButton unava = new JRadioButton("Unavailable");
+        ButtonGroup group1 = new ButtonGroup();
+        JPanel radrioJPanel = new JPanel();
+        radrioJPanel.setLayout(new BoxLayout(radrioJPanel,BoxLayout.X_AXIS));
+       
+        JLabel price = new JLabel("Price");
+        JTextField t1 = new JTextField(10);
+        t1.setBounds(10, 10, 150, 30);
+        t1.setText("$");
+        
+        JPanel pricePanel = new JPanel();
+
         JFrame editMenu = new JFrame("Editing existing room for booking");
 
         JFrame studentMenu = new JFrame("Welcome to my booking system");
@@ -199,6 +220,33 @@ class Demo extends JFrame{
         createRoomButton.addActionListener(e -> {
             // if button is clicked
             if (e.getSource() == createRoomButton) {
+                Room r1 = new Room();
+                creatingMenu.add(b1, BorderLayout.NORTH);
+                creatingMenu.add(b2, BorderLayout.SOUTH);
+                creatingMenu.add(b3, BorderLayout.EAST);
+                creatingMenu.add(b4, BorderLayout.WEST);
+
+                header1.setAlignmentX(Component.CENTER_ALIGNMENT);
+                group1.add(ava);group1.add(unava);
+                radrioJPanel.add(ava);radrioJPanel.add(unava);
+                //ava.setForeground(Color.white);unava.setForeground(Color.white);
+                //radrioJPanel.setBackground(Color.darkGray);
+                //ava.setBackground(Color.darkGray);unava.setBackground(Color.darkGray);
+                creatingPanel.add(radrioJPanel);
+
+                if(ava.isSelected()){
+                    r1.setAvailability("Available");
+                }
+
+                if(unava.isSelected()){
+                    r1.setAvailability("Unavailable");
+                }
+
+                pricePanel.add(price);
+                price.setAlignmentX(CENTER_ALIGNMENT);
+                pricePanel.add(t1);
+                t1.setAlignmentX(CENTER_ALIGNMENT);
+                creatingPanel.add(pricePanel);
 
                 staffMenu.setVisible(false);
                 creatingMenu.setVisible(true);
