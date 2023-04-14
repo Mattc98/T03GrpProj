@@ -129,7 +129,6 @@ class Demo extends JFrame{
         wel.setIcon(welGif);
         loginPage.add(wel);
 
-
         JButton staffB = new JButton("UOWStaff");
         loginPage.add(staffB);
 
@@ -153,18 +152,12 @@ class Demo extends JFrame{
         JButton logoutStaffButton = new JButton("Log out");
 
         JFrame creatingMenu = new JFrame("Creating new room for booking");
-        creatingMenu.setSize(450, 250);
+        creatingMenu.setSize(450, 450);
 
         JPanel creatingPanel = new JPanel();
         creatingPanel.setLayout(new BoxLayout(creatingPanel,BoxLayout.Y_AXIS));
-        creatingMenu.add(creatingPanel);
-        //creatingPanel.setBackground(Color.darkGray);
-
+        
         JLabel header1 = new JLabel();
-        //header1.setForeground(Color.white);
-        header1.setText("~~~ Settings for New Room ~~~");
-        creatingPanel.add(header1);
-
 
         JRadioButton ava = new JRadioButton("Available");
         JRadioButton unava = new JRadioButton("Unavailable");
@@ -174,10 +167,22 @@ class Demo extends JFrame{
        
         JLabel price = new JLabel("Price");
         JTextField t1 = new JTextField(10);
-        t1.setBounds(10, 10, 150, 30);
-        t1.setText("$");
         
         JPanel pricePanel = new JPanel();
+        
+        JPanel timingJPanel = new JPanel();
+
+        JLabel timingLabel = new JLabel("Select timing slot");
+
+        JRadioButton rb1 = new JRadioButton("8:00AM - 10:00AM");
+        JRadioButton rb2 = new JRadioButton("10:00AM - 12:00AM");
+        JRadioButton rb3 = new JRadioButton("12:00AM - 2:00PM");
+        JRadioButton rb4 = new JRadioButton("2:00PM - 4:00PM");
+        JRadioButton rb5 = new JRadioButton("4:00PM - 6:00PM");
+
+
+        JButton createRoom = new JButton("Create Room");
+
 
         JFrame editMenu = new JFrame("Editing existing room for booking");
 
@@ -220,19 +225,47 @@ class Demo extends JFrame{
         createRoomButton.addActionListener(e -> {
             // if button is clicked
             if (e.getSource() == createRoomButton) {
-                Room r1 = new Room();
                 creatingMenu.add(b1, BorderLayout.NORTH);
                 creatingMenu.add(b2, BorderLayout.SOUTH);
                 creatingMenu.add(b3, BorderLayout.EAST);
                 creatingMenu.add(b4, BorderLayout.WEST);
 
+                header1.setText("~~~ Settings for New Room ~~~");
+                creatingMenu.add(creatingPanel);
+                creatingPanel.add(header1);
                 header1.setAlignmentX(Component.CENTER_ALIGNMENT);
                 group1.add(ava);group1.add(unava);
                 radrioJPanel.add(ava);radrioJPanel.add(unava);
-                //ava.setForeground(Color.white);unava.setForeground(Color.white);
-                //radrioJPanel.setBackground(Color.darkGray);
-                //ava.setBackground(Color.darkGray);unava.setBackground(Color.darkGray);
                 creatingPanel.add(radrioJPanel);
+
+                pricePanel.add(price);
+                pricePanel.add(t1);
+                creatingPanel.add(pricePanel);
+                //pricePanel.setBackground(Color.YELLOW);
+
+
+                t1.setBounds(1, 1, 150, 50);
+
+                timingJPanel.add(timingLabel);
+                timingJPanel.add(rb1);
+                timingJPanel.add(rb2);
+                timingJPanel.add(rb3);
+                timingJPanel.add(rb4);
+                timingJPanel.add(rb5);
+                creatingPanel.add(timingJPanel);
+
+                
+                creatingPanel.add(createRoom);
+
+                staffMenu.setVisible(false);
+                creatingMenu.setVisible(true);
+            }
+        });
+
+        createRoom.addActionListener(e -> {
+            // if button is clicked
+            if (e.getSource() == createRoom) {
+                Room r1 = new Room();
 
                 if(ava.isSelected()){
                     r1.setAvailability("Available");
@@ -242,16 +275,14 @@ class Demo extends JFrame{
                     r1.setAvailability("Unavailable");
                 }
 
-                pricePanel.add(price);
-                price.setAlignmentX(CENTER_ALIGNMENT);
-                pricePanel.add(t1);
-                t1.setAlignmentX(CENTER_ALIGNMENT);
-                creatingPanel.add(pricePanel);
+                String s = t1.getText();
+                r1.setPricing(Double.parseDouble(s));
 
-                staffMenu.setVisible(false);
-                creatingMenu.setVisible(true);
+                staffMenu.setVisible(true);
+                editMenu.setVisible(false);
             }
         });
+       
 
         editRoomButton.addActionListener(e -> {
             // if button is clicked
