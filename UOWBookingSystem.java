@@ -4,15 +4,16 @@ import java.util.InputMismatchException;
 
 class UOWBookingSystem {
     private static Scanner input;
-    private static ArrayList<Room> roomList = new ArrayList<Room>();
-    private static ArrayList<Room> occupiedRoomList = new ArrayList<Room>();
-
+    private static int userID;
+    private static ArrayList<User> userList = new ArrayList<>();
+    private static ArrayList<Room> roomList = new ArrayList<>();
+    private static ArrayList<Room> occupiedRoomList = new ArrayList<>();
 
     private static void firstMenu() {
-        System.out.println("----------------------");
-        System.out.println("Are you a UOWStaff or UOW student?");
-        System.out.println("1.UOWStaff");
-        System.out.println("2.UOWStudent");
+        System.out.println("\n----------------------");
+        System.out.println("Main Menu");
+        System.out.println("1.Create account");
+        System.out.println("2.Login");
         System.out.println("3.Exit");
         System.out.print(".............\n");
 
@@ -22,7 +23,7 @@ class UOWBookingSystem {
             userSelection = input.nextInt();
             switch (userSelection) {
                 case 1:
-                    staffMenu();
+                    createMenu();
                 case 2:
                     studentMenu();
                 case 3:
@@ -40,6 +41,71 @@ class UOWBookingSystem {
         }
     }
 
+    private static void createMenu() {
+        System.out.println("----------------------");
+        System.out.println("==> Creating new account");
+        System.out.print("----------------------\n");
+        System.out.println("Are you a staff or student");
+        System.out.println("1.UOWStaff.");
+        System.out.println("2.UOWStudent.");
+        System.out.print(".............\n");
+
+        User user = new User();
+
+        int t = input.nextInt();
+
+        if (t == 1) {
+            user.setIsStaff(true);
+        }
+
+        System.out.print("----------------------\n");
+        System.out.println("Set Username");
+        System.out.print(".............\n");
+
+        input.next();
+        String un = input.nextLine();
+        user.setUsername(un);
+
+        System.out.print("----------------------\n");
+        System.out.println("Set Password");
+        System.out.print(".............\n");
+
+        String pw = input.nextLine();
+        user.setPassword(pw);
+
+        userList.add(user);
+        System.out.println("\nAccount created");
+
+        firstMenu();
+    }
+
+    private static void loginPage() {
+        System.out.println("----------------------");
+        System.out.println("==> Login Page");
+        System.out.print("----------------------\n");
+        System.out.println("Enter your username");
+        System.out.print(".............\n");
+
+        String user;
+        user = input.nextLine();
+
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUsername().equals(user)) {
+                userID = i;
+            }
+        }
+
+        System.out.println("Enter your password");
+        System.out.print(".............\n");
+
+        String userpw = input.nextLine();
+
+        if (userList.get(userID).getPassword().equals(userpw)) {
+            userList.get(userID).isStaff().equals(true);
+        }
+
+    }
+
     private static void staffMenu() {
         System.out.println("----------------------");
         System.out.println("==> Staff Menu");
@@ -49,7 +115,7 @@ class UOWBookingSystem {
         System.out.println("3.Log out");
         System.out.print(".............\n");
 
-        try{     
+        try {
             int staffOption = 0;
             input = new Scanner(System.in);
             staffOption = input.nextInt();
@@ -68,8 +134,8 @@ class UOWBookingSystem {
                 System.out.println("\nEnter a number between 1 and 3\n");
                 staffMenu();
             }
-            
-        }catch(InputMismatchException e) {
+
+        } catch (InputMismatchException e) {
             System.out.println("\nplease enter number");
             staffMenu();
         }
@@ -246,7 +312,7 @@ class UOWBookingSystem {
         System.out.println("4.Log out");
         System.out.print(".............\n");
 
-        try{
+        try {
             int studentOption;
             input = new Scanner(System.in);
             studentOption = input.nextInt();
@@ -295,7 +361,8 @@ class UOWBookingSystem {
         int roomSelected;
         roomSelected = input.nextInt();
 
-        if (roomList.get(roomSelected - 1).getBooked() == "Vacant" && roomList.get(roomSelected - 1).getAvailability() == "Available" ) {
+        if (roomList.get(roomSelected - 1).getBooked() == "Vacant"
+                && roomList.get(roomSelected - 1).getAvailability() == "Available") {
 
             System.out.print("----------------------\n");
             System.out.println("Do you have a Promo Code?");
@@ -304,12 +371,11 @@ class UOWBookingSystem {
             input.next();
             String promo;
             promo = input.nextLine();
-            if(roomList.get(roomSelected - 1).getPromocode().equals(promo)){
+            if (roomList.get(roomSelected - 1).getPromocode().equals(promo)) {
                 double discountedPrice = roomList.get(roomSelected - 1).getPricing() * 0.8;
                 System.out.print("----------------------\n");
                 System.out.printf("Room price after discount is %.2f%n", discountedPrice);
-            }
-            else{
+            } else {
                 System.out.printf("Room price without discount is %.2f%n", roomList.get(roomSelected - 1).getPricing());
             }
 
@@ -328,7 +394,7 @@ class UOWBookingSystem {
         }
     }
 
-    private static void roomRemoval(){
+    private static void roomRemoval() {
         for (int i = 0; i < roomList.size(); i++) {
             System.out.printf("%nRoom %d is %s ", i + 1, occupiedRoomList.get(i).getAvailability());
             System.out.println(occupiedRoomList.get(i));
@@ -342,7 +408,7 @@ class UOWBookingSystem {
         roomSelected = input.nextInt();
 
         occupiedRoomList.get(roomSelected - 1).setBooked("Vacant");
-        occupiedRoomList.remove(roomSelected -1);
+        occupiedRoomList.remove(roomSelected - 1);
         studentMenu();
     }
 
@@ -432,12 +498,12 @@ class Room {
     }
 }
 
-class User{
+class User {
     String username;
     String password;
     Boolean isStaff;
 
-    public User(){
+    public User() {
         isStaff = false;
     }
 
@@ -447,28 +513,27 @@ class User{
         this.isStaff = isStaff;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return username;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
-    public Boolean isStaff(){
+    public Boolean isStaff() {
         return isStaff;
     }
 
-    public void setUsername(String username){
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setIsStaff(Boolean isStaff){
+    public void setIsStaff(Boolean isStaff) {
         this.isStaff = isStaff;
     }
 }
-
