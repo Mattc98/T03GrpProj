@@ -47,8 +47,9 @@ class UOWBookingSystem {
         System.out.println("==> Creating new account");
         System.out.print("----------------------\n");
         System.out.println("Are you a staff or student");
-        System.out.println("1.UOWStaff.");
-        System.out.println("2.UOWStudent.");
+        System.out.println("1. UOWStaff");
+        System.out.println("2. UOWStudent");
+        System.out.println("3. Exit");
         System.out.print(".............\n");
 
         User user = new User();
@@ -56,8 +57,11 @@ class UOWBookingSystem {
 
         if (t == 1) {
             user.setIsStaff(true);
-        } else {
+        } else if (t == 2){
             user.setIsStaff(false);
+        }
+        else if (t == 3){
+            firstMenu();
         }
 
         System.out.print("----------------------\n");
@@ -103,12 +107,16 @@ class UOWBookingSystem {
 
         String userpw = input.nextLine();
 
-        if (userList.get(userID).getPassword().equals(userpw)) {
+        if (userList.get(userID).getPassword().equals(userpw) && userList.get(userID).getUsername().equals(user)) {
             if (userList.get(userID).isStaff().equals(true)) {
                 staffMenu();
             } else if (userList.get(userID).isStaff().equals(false)){
                 studentMenu();
             }
+        }
+        else{
+            System.out.println("\nWrong la bodoh");
+            firstMenu();
         }
 
     }
@@ -404,6 +412,7 @@ class UOWBookingSystem {
     }
 
     private static void roomRemoval() {
+        input = new Scanner(System.in);
         for (int i = 0; i < roomList.size(); i++) {
             System.out.printf("%nRoom %d is %s ", i + 1, occupiedRoomList.get(i).getAvailability());
             System.out.println(occupiedRoomList.get(i));
