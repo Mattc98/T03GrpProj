@@ -325,8 +325,9 @@ class UOWBookingSystem {
         System.out.print("----------------------\n");
         System.out.println("1.View Room List");
         System.out.println("2.Make a room booking");
-        System.out.println("3.Delete room booking");
-        System.out.println("4.Log out");
+        System.out.println("3.Edit room booking");
+        System.out.println("4.Delete room booking");
+        System.out.println("5.Log out");
         System.out.print(".............\n");
 
         try {
@@ -347,9 +348,12 @@ class UOWBookingSystem {
                     bookingMenu();
 
                 case 3:
-                    roomRemoval();
+                    editRoomBooking();
 
                 case 4:
+                    roomRemoval();
+
+                case 5:
                     firstMenu();
 
             }
@@ -362,6 +366,37 @@ class UOWBookingSystem {
             System.out.println("\nplease enter number");
             studentMenu();
         }
+
+    }
+
+    private static void editRoomBooking(){
+        input = new Scanner(System.in);
+        for (int i = 0; i < occupiedRoomList.size(); i++) {
+            System.out.printf("%nRoom %d is %s ", i + 1, occupiedRoomList.get(i).getAvailability());
+            System.out.println(occupiedRoomList.get(i));
+            System.out.print("----------------------\n");
+        }
+
+        System.out.println("Select a room");
+        System.out.print(".............\n");
+
+        int roomSelected;
+        roomSelected = input.nextInt();
+
+        occupiedRoomList.get(roomSelected - 1).setBooked("Vacant");
+        occupiedRoomList.remove(roomSelected - 1);
+
+        System.out.println("Select a new room");
+        System.out.print(".............\n");
+
+        int roomSelected2;
+        roomSelected2 = input.nextInt();
+
+        roomList.get(roomSelected2 - 1).setBooked("Occupied");
+        occupiedRoomList.remove(roomSelected2 - 1);
+
+        System.out.print("----------------------\n");
+        System.out.println("Room edit successful");
 
     }
 
@@ -413,7 +448,7 @@ class UOWBookingSystem {
 
     private static void roomRemoval() {
         input = new Scanner(System.in);
-        for (int i = 0; i < roomList.size(); i++) {
+        for (int i = 0; i < occupiedRoomList.size(); i++) {
             System.out.printf("%nRoom %d is %s ", i + 1, occupiedRoomList.get(i).getAvailability());
             System.out.println(occupiedRoomList.get(i));
             System.out.print("----------------------\n");
@@ -421,6 +456,7 @@ class UOWBookingSystem {
 
         System.out.println("Select a room");
         System.out.print(".............\n");
+
 
         int roomSelected;
         roomSelected = input.nextInt();
