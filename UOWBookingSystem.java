@@ -304,7 +304,7 @@ class UOWBookingSystem {
             input.next();
             String promo;
             promo = input.nextLine();
-            if(roomList.get(roomSelected - 1).getPromocode() == promo){
+            if(roomList.get(roomSelected - 1).getPromocode().equals(promo)){
                 double discountedPrice = roomList.get(roomSelected - 1).getPricing() * 0.8;
                 System.out.print("----------------------\n");
                 System.out.printf("Room price after discount is %.2f%n", discountedPrice);
