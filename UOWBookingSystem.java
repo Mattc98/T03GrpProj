@@ -64,11 +64,9 @@ class UOWBookingSystem {
         System.out.println("Set Username");
         System.out.print(".............\n");
 
-        input.next();
+        input.nextLine();
         String un;
         un = input.nextLine();
-        System.out.println(un);// not working
-
         user.setUsername(un);
 
         System.out.print("----------------------\n");
@@ -80,11 +78,6 @@ class UOWBookingSystem {
 
         userList.add(user);
         System.out.println("\nAccount created");
-
-        for (int i = 0; i < userList.size(); i++) {
-            System.out.println(userList.get(i));
-        }
-
         firstMenu();
     }
 
@@ -95,7 +88,7 @@ class UOWBookingSystem {
         System.out.println("Enter your username");
         System.out.print(".............\n");
 
-        input.next();
+        input.nextLine();
         String user;
         user = input.nextLine();
 
@@ -113,7 +106,7 @@ class UOWBookingSystem {
         if (userList.get(userID).getPassword().equals(userpw)) {
             if (userList.get(userID).isStaff().equals(true)) {
                 staffMenu();
-            } else {
+            } else if (userList.get(userID).isStaff().equals(false)){
                 studentMenu();
             }
         }
