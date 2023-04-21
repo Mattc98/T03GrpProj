@@ -25,7 +25,7 @@ class UOWBookingSystem {
                 case 1:
                     createMenu();
                 case 2:
-                    studentMenu();
+                    loginPage();
                 case 3:
                     System.exit(0);
             }
@@ -42,6 +42,7 @@ class UOWBookingSystem {
     }
 
     private static void createMenu() {
+        input = new Scanner(System.in);
         System.out.println("----------------------");
         System.out.println("==> Creating new account");
         System.out.print("----------------------\n");
@@ -51,11 +52,12 @@ class UOWBookingSystem {
         System.out.print(".............\n");
 
         User user = new User();
-
         int t = input.nextInt();
 
         if (t == 1) {
             user.setIsStaff(true);
+        } else {
+            user.setIsStaff(false);
         }
 
         System.out.print("----------------------\n");
@@ -63,7 +65,10 @@ class UOWBookingSystem {
         System.out.print(".............\n");
 
         input.next();
-        String un = input.nextLine();
+        String un;
+        un = input.nextLine();
+        System.out.println(un);// not working
+
         user.setUsername(un);
 
         System.out.print("----------------------\n");
@@ -76,6 +81,10 @@ class UOWBookingSystem {
         userList.add(user);
         System.out.println("\nAccount created");
 
+        for (int i = 0; i < userList.size(); i++) {
+            System.out.println(userList.get(i));
+        }
+
         firstMenu();
     }
 
@@ -86,6 +95,7 @@ class UOWBookingSystem {
         System.out.println("Enter your username");
         System.out.print(".............\n");
 
+        input.next();
         String user;
         user = input.nextLine();
 
@@ -101,7 +111,11 @@ class UOWBookingSystem {
         String userpw = input.nextLine();
 
         if (userList.get(userID).getPassword().equals(userpw)) {
-            userList.get(userID).isStaff().equals(true);
+            if (userList.get(userID).isStaff().equals(true)) {
+                staffMenu();
+            } else {
+                studentMenu();
+            }
         }
 
     }
@@ -240,7 +254,9 @@ class UOWBookingSystem {
                 System.out.println("2.Unavailable");
                 System.out.print(".............\n");
                 input = new Scanner(System.in);
+
                 int a = input.nextInt();
+
                 if (a == 1) {
                     roomList.get(roomSelected - 1).setAvailability("Available");
                 } else if (a == 2) {
@@ -535,5 +551,9 @@ class User {
 
     public void setIsStaff(Boolean isStaff) {
         this.isStaff = isStaff;
+    }
+
+    public String toString() {
+        return String.format("User: %s%nPassword: %s%nStaff: %b", getUsername(), password, isStaff);
     }
 }
