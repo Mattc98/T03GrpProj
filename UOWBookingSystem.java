@@ -57,10 +57,9 @@ class UOWBookingSystem {
 
         if (t == 1) {
             user.setIsStaff(true);
-        } else if (t == 2){
+        } else if (t == 2) {
             user.setIsStaff(false);
-        }
-        else if (t == 3){
+        } else if (t == 3) {
             firstMenu();
         }
 
@@ -110,11 +109,10 @@ class UOWBookingSystem {
         if (userList.get(userID).getPassword().equals(userpw) && userList.get(userID).getUsername().equals(user)) {
             if (userList.get(userID).isStaff().equals(true)) {
                 staffMenu();
-            } else if (userList.get(userID).isStaff().equals(false)){
+            } else if (userList.get(userID).isStaff().equals(false)) {
                 studentMenu();
             }
-        }
-        else{
+        } else {
             System.out.println("\nWrong la bodoh");
             firstMenu();
         }
@@ -337,11 +335,24 @@ class UOWBookingSystem {
 
             switch (studentOption) {
                 case 1:
+                    System.out.print("Vacant\n");
+                    System.out.print("----------------------\n");
+
                     for (int i = 0; i < roomList.size(); i++) {
                         System.out.printf("%nRoom %d is %s ", i + 1, roomList.get(i).getAvailability());
                         System.out.println(roomList.get(i));
                         System.out.print("----------------------\n");
                     }
+
+                    System.out.print("Occupied\n");
+                    System.out.print("----------------------\n");
+
+                    for (int i = 0; i < occupiedRoomList.size(); i++) {
+                        System.out.printf("%nRoom %d is %s ", i + 1, occupiedRoomList.get(i).getAvailability());
+                        System.out.println(occupiedRoomList.get(i));
+                        System.out.print("----------------------\n");
+                    }
+
                     studentMenu();
 
                 case 2:
@@ -369,8 +380,9 @@ class UOWBookingSystem {
 
     }
 
-    private static void editRoomBooking(){
+    private static void editRoomBooking() {
         input = new Scanner(System.in);
+
         for (int i = 0; i < occupiedRoomList.size(); i++) {
             System.out.printf("%nRoom %d is %s ", i + 1, occupiedRoomList.get(i).getAvailability());
             System.out.println(occupiedRoomList.get(i));
@@ -382,22 +394,35 @@ class UOWBookingSystem {
 
         int roomSelected;
         roomSelected = input.nextInt();
+        roomSelected -= 1;
 
-        occupiedRoomList.get(roomSelected - 1).setBooked("Vacant");
-        occupiedRoomList.remove(roomSelected - 1);
+        occupiedRoomList.get(roomSelected).setBooked("Vacant");
+        Room temp = occupiedRoomList.get(roomSelected);
+        roomList.add(temp);
 
-        System.out.println("Select a new room");
+        occupiedRoomList.remove(temp);
+
+        for (int i = 0; i < roomList.size(); i++) {
+            System.out.printf("%nRoom %d is %s ", i + 1, roomList.get(i).getAvailability());
+            System.out.println(roomList.get(i));
+            System.out.print("----------------------\n");
+        }
+
+        System.out.println("Select a room");
         System.out.print(".............\n");
 
         int roomSelected2;
         roomSelected2 = input.nextInt();
+        roomSelected2 -= 1;
 
-        roomList.get(roomSelected2 - 1).setBooked("Occupied");
-        occupiedRoomList.remove(roomSelected2 - 1);
+        roomList.get(roomSelected2).setBooked("Occupied");
+        temp = roomList.get(roomSelected2);
+        occupiedRoomList.add(temp);
+        roomList.remove(temp);
 
-        System.out.print("----------------------\n");
-        System.out.println("Room edit successful");
+        System.out.println("Room booked successfully");
 
+        studentMenu();
     }
 
     private static void bookingMenu() {
@@ -412,27 +437,33 @@ class UOWBookingSystem {
 
         int roomSelected;
         roomSelected = input.nextInt();
+        roomSelected -= 1;
 
-        if (roomList.get(roomSelected - 1).getBooked() == "Vacant"
-                && roomList.get(roomSelected - 1).getAvailability() == "Available") {
+        if (roomList.get(roomSelected).getBooked() == "Vacant"
+                && roomList.get(roomSelected).getAvailability() == "Available") {
 
             System.out.print("----------------------\n");
             System.out.println("Do you have a Promo Code?");
             System.out.print(".............\n");
 
-            input.next();
+            input.nextLine();
             String promo;
             promo = input.nextLine();
-            if (roomList.get(roomSelected - 1).getPromocode().equals(promo)) {
-                double discountedPrice = roomList.get(roomSelected - 1).getPricing() * 0.8;
+
+            if (roomList.get(roomSelected).getPromocode().equals(promo)) {
+                double discountedPrice = roomList.get(roomSelected).getPricing() * 0.8;
                 System.out.print("----------------------\n");
                 System.out.printf("Room price after discount is %.2f%n", discountedPrice);
+
             } else {
-                System.out.printf("Room price without discount is %.2f%n", roomList.get(roomSelected - 1).getPricing());
+                System.out.printf("Room price without discount is %.2f%n", roomList.get(roomSelected).getPricing());
             }
 
-            roomList.get(roomSelected - 1).setBooked("Occupied");
-            occupiedRoomList.add(roomList.get(roomSelected - 1));
+            roomList.get(roomSelected).setBooked("Occupied");
+            Room temp = roomList.get(roomSelected);
+            occupiedRoomList.add(temp);
+            roomList.remove(temp);
+
             System.out.print("----------------------\n");
             System.out.println("Room booked successfully");
 
@@ -457,12 +488,16 @@ class UOWBookingSystem {
         System.out.println("Select a room");
         System.out.print(".............\n");
 
-
         int roomSelected;
         roomSelected = input.nextInt();
+        roomSelected -= 1;
 
-        occupiedRoomList.get(roomSelected - 1).setBooked("Vacant");
-        occupiedRoomList.remove(roomSelected - 1);
+        occupiedRoomList.get(roomSelected).setBooked("Vacant");
+
+        Room temp = occupiedRoomList.get(roomSelected);
+        roomList.add(temp);
+        occupiedRoomList.remove(temp);
+
         studentMenu();
     }
 
