@@ -439,18 +439,21 @@ class UOWBookingSystem {
         roomSelected = input.nextInt();
         roomSelected -= 1;
 
-        if (roomList.get(roomSelected).getBooked() == "Vacant"
-                && roomList.get(roomSelected).getAvailability() == "Available") {
+        Room room = roomList.get(roomSelected);
 
+        if (room.getBooked() == "Vacant" && room.getAvailability() == "Available") {
             System.out.print("----------------------\n");
             System.out.println("Do you have a Promo Code?");
             System.out.print(".............\n");
 
             input.nextLine();
-            String promo;
+            String promo =  new String();
             promo = input.nextLine();
 
-            if (roomList.get(roomSelected).getPromocode().equals(promo)) {
+            System.out.println(promo);
+            System.out.println(room.getPromocode());
+
+            if (room.getPromocode().equals(promo)) {
                 double discountedPrice = roomList.get(roomSelected).getPricing() * 0.8;
                 System.out.print("----------------------\n");
                 System.out.printf("Room price after discount is %.2f%n", discountedPrice);
