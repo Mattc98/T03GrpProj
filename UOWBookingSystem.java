@@ -1,13 +1,11 @@
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Scanner;
-
-import org.w3c.dom.TypeInfo;
 
 import java.util.InputMismatchException;
 
 
 class UOWBookingSystem {
+    //Declare variable
     private static Scanner input;
     private static int userID;
     private static String studentpromo;
@@ -15,7 +13,9 @@ class UOWBookingSystem {
     private static ArrayList<Room> roomList = new ArrayList<>();
     private static ArrayList<Room> occupiedRoomList = new ArrayList<>();
 
+    //Main menu
     private static void firstMenu() {
+        //Display
         System.out.println("\n----------------------");
         System.out.println("Main Menu");
         System.out.println("1.Create account");
@@ -23,6 +23,7 @@ class UOWBookingSystem {
         System.out.println("3.Exit");
         System.out.print(".............\n");
 
+        //check for error
         try {
             input = new Scanner(System.in);
             int userSelection;
@@ -37,17 +38,19 @@ class UOWBookingSystem {
             }
 
             if (userSelection > 3 || userSelection < 1) {
-                System.out.println("\nEnter a number between 1 and 3\n");
+                System.out.println("\n\tERROR. Enter a number between 1 and 3\n");
                 firstMenu();
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("\nplease enter number");
+            System.out.println("\n\tplease enter number");
             firstMenu();
         }
     }
 
+    //Create account menu
     private static void createMenu() {
+        //Display
         input = new Scanner(System.in);
         System.out.println("----------------------");
         System.out.println("==> Creating new account");
@@ -61,18 +64,28 @@ class UOWBookingSystem {
         User user = new User();
         int t = input.nextInt();
 
+        //Check for error
         if (t == 1) {
             user.setIsStaff(true);
         } else if (t == 2) {
             user.setIsStaff(false);
         } else if (t == 3) {
             firstMenu();
+        } else {
+            System.out.println("\n\tERROR. Enter a valid option\n");
+            createMenu();
         }
 
+
         System.out.print("----------------------\n");
-        System.out.println("Set Username");
+        if  (user.isStaff == true) {
+            System.out.println("Set Username for Staff account");
+        } else {
+            System.out.println("Set Username for Student account");
+        }
         System.out.print(".............\n");
 
+        //Store the accounts
         input.nextLine();
         String un;
         un = input.nextLine();
@@ -86,21 +99,25 @@ class UOWBookingSystem {
         user.setPassword(pw);
 
         userList.add(user);
-        System.out.println("\nAccount created");
+        System.out.println("\n---Account created---");
         firstMenu();
     }
 
+    //Login menu
     private static void loginPage() {
         System.out.println("----------------------");
         System.out.println("==> Login Page");
         System.out.print("----------------------\n");
         System.out.println("Enter your username");
+        System.out.println("0. Return to previous menu");
         System.out.print(".............\n");
+
 
         input.nextLine();
         String user;
         user = input.nextLine();
 
+        //Set userID to userList size
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getUsername().equals(user)) {
                 userID = i;
@@ -112,6 +129,7 @@ class UOWBookingSystem {
 
         String userpw = input.nextLine();
 
+        //Redirect to either staff or student
         if (userList.get(userID).getPassword().equals(userpw) && userList.get(userID).getUsername().equals(user)) {
             if (userList.get(userID).isStaff().equals(true)) {
                 staffMenu();
@@ -119,7 +137,7 @@ class UOWBookingSystem {
                 studentMenu();
             }
         } else {
-            System.out.println("\nWrong la bodoh");
+            System.out.println("\n\tWrong la bodoh");
             firstMenu();
         }
 
