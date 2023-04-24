@@ -1,6 +1,11 @@
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Scanner;
+
+import org.w3c.dom.TypeInfo;
+
 import java.util.InputMismatchException;
+
 
 class UOWBookingSystem {
     private static Scanner input;
@@ -203,7 +208,7 @@ class UOWBookingSystem {
         System.out.println("Room PROMOCODE");
         System.out.print(".............\n");
 
-        input.next();
+        input.nextLine();
         String PC = input.nextLine();
         room.setPromocode(PC);
 
@@ -456,9 +461,6 @@ class UOWBookingSystem {
             input.nextLine();
             studentpromo = input.nextLine();
 
-            //System.out.println(promo);
-            //System.out.println(room.getPromocode());
-
             if (room.getPromocode().equals(studentpromo)) {
                 double discountedPrice = roomList.get(roomSelected).getPricing() * 0.8;
                 System.out.println("\n----------------------");
@@ -528,7 +530,6 @@ class Room {
         this.availability = "Available";
         this.pricing = 15.00;
         this.timing = "8:00 AM - 10:00 AM";
-        this.promocode = "";
         this.capacity = 4;
         this.booked = "Vacant";
     }
