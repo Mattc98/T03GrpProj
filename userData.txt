@@ -1,0 +1,2 @@
+root        pw  true
+student1    hi  false
