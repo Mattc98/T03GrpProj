@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -19,16 +21,34 @@ class UOWBookingSystem {
     // Write user data to text
     private static void bufferWriteFile(String user, String password, boolean isStaff){
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("userData.txt"));
-            writer.write(user + " ");
-            writer.write(password + " ");
-            writer.write(isStaff + " ");
+            //append true to add to add to existing file 
+            BufferedWriter writer = new BufferedWriter(new FileWriter("userData.txt", true));
+            writer.write(user + "\t");
+            writer.write(password + "\t");
+            writer.write(isStaff + "\t\n");
             writer.close();
         } catch (IOException e){
             e.printStackTrace();
         }
     }
     
+    //Read userData.txt
+    private static void bufferReadFile(){
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("userData.txt"));
+            String line;
+            while ((line = reader.readLine()) != null)
+                System.out.println(line);
+            reader.close();
+        } catch (FileNotFoundException e){
+            System.out.println("Database not found");
+            System.out.println("---Exiting Program---");
+            System.exit(1);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     //Main menu
     private static void firstMenu() {
         //Display
@@ -76,8 +96,8 @@ class UOWBookingSystem {
         System.out.println("3. Exit");
         System.out.print(".............\n");
 
+        //Prompt user input
         User user = new User();
-
         int t = input.nextInt();
 
         if (t == 1) {
@@ -91,7 +111,7 @@ class UOWBookingSystem {
             createMenu();
         }
 
-
+        //Display
         System.out.print("----------------------\n");
         if  (user.isStaff == true) {
             System.out.println("Set Username for Staff account");
@@ -100,7 +120,7 @@ class UOWBookingSystem {
         }
         System.out.print(".............\n");
 
-        //Store the accounts
+        //Create account
         input.nextLine();
         String un;
         un = input.nextLine();
@@ -114,23 +134,25 @@ class UOWBookingSystem {
         user.setPassword(pw);
 
         userList.add(user);
-
+        
         bufferWriteFile(un, pw, user.isStaff());
 
         System.out.println("\n---Account created---");
-
+        //TODO testing readFile()
+        bufferReadFile();
         firstMenu();
     }
 
     //Login menu
     private static void loginPage() {
+        //Display
         System.out.println("----------------------");
         System.out.println("==> Login Page");
         System.out.print("----------------------\n");
         System.out.println("Enter your username");
         System.out.print(".............\n");
 
-
+        //Get user input
         input.nextLine();
         String user;
         user = input.nextLine();
@@ -147,6 +169,7 @@ class UOWBookingSystem {
 
         String userpw = input.nextLine();
 
+        
         //Redirect to either staff or student
         if (userList.get(userID).getPassword().equals(userpw) && userList.get(userID).getUsername().equals(user)) {
             if (userList.get(userID).isStaff().equals(true)) {
