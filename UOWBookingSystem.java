@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.InputMismatchException;
 
-
+ 
 class UOWBookingSystem {
     //Declare variable
     private static Scanner input;
@@ -12,7 +15,20 @@ class UOWBookingSystem {
     private static ArrayList<User> userList = new ArrayList<>();
     private static ArrayList<Room> roomList = new ArrayList<>();
     private static ArrayList<Room> occupiedRoomList = new ArrayList<>();
-
+    
+    // Write user data to text
+    private static void bufferWriteFile(String user, String password, boolean isStaff){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("userData.txt"));
+            writer.write(user + " ");
+            writer.write(password + " ");
+            writer.write(isStaff + " ");
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    
     //Main menu
     private static void firstMenu() {
         //Display
@@ -23,7 +39,7 @@ class UOWBookingSystem {
         System.out.println("3.Exit");
         System.out.print(".............\n");
 
-        //check for error
+        //Get user input
         try {
             input = new Scanner(System.in);
             int userSelection;
@@ -36,7 +52,6 @@ class UOWBookingSystem {
                 case 3:
                     System.exit(0);
             }
-
             if (userSelection > 3 || userSelection < 1) {
                 System.out.println("\n\tERROR. Enter a number between 1 and 3\n");
                 firstMenu();
@@ -62,9 +77,9 @@ class UOWBookingSystem {
         System.out.print(".............\n");
 
         User user = new User();
+
         int t = input.nextInt();
 
-        //Check for error
         if (t == 1) {
             user.setIsStaff(true);
         } else if (t == 2) {
@@ -72,7 +87,7 @@ class UOWBookingSystem {
         } else if (t == 3) {
             firstMenu();
         } else {
-            System.out.println("\n\tERROR. Enter a valid option\n");
+            System.out.println("\n\t---Error. Enter a valid option\n");
             createMenu();
         }
 
@@ -99,7 +114,11 @@ class UOWBookingSystem {
         user.setPassword(pw);
 
         userList.add(user);
+
+        bufferWriteFile(un, pw, user.isStaff());
+
         System.out.println("\n---Account created---");
+
         firstMenu();
     }
 
@@ -109,7 +128,6 @@ class UOWBookingSystem {
         System.out.println("==> Login Page");
         System.out.print("----------------------\n");
         System.out.println("Enter your username");
-        System.out.println("0. Return to previous menu");
         System.out.print(".............\n");
 
 
@@ -423,6 +441,16 @@ class UOWBookingSystem {
         int roomSelected;
         roomSelected = input.nextInt();
         roomSelected -= 1;
+
+        //Edit timing 
+        System.out.printf("--You have selected room%d--%n", roomSelected + 1);
+        System.out.print("----------------------\n");
+        System.out.print("==> Edit booking\n");
+        System.out.print("----------------------\n");
+        System.out.println("1. Edit time of booking");
+        System.out.println("2. Edit promocode");
+        System.out.println("0. Return");
+
 
         occupiedRoomList.get(roomSelected).setBooked("Vacant");
         Room temp = occupiedRoomList.get(roomSelected);
