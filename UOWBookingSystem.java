@@ -23,9 +23,9 @@ class UOWBookingSystem {
         try {
             //append true to add to add to existing file 
             BufferedWriter writer = new BufferedWriter(new FileWriter("userData.txt", true));
-            writer.write(user + "\t");
-            writer.write(password + "\t");
-            writer.write(isStaff + "\t\n");
+            writer.write(String.format("%-10s", user));
+            writer.write(String.format("%-15s", password));
+            writer.write(String.format("%-5b%n", isStaff));
             writer.close();
         } catch (IOException e){
             e.printStackTrace();
@@ -138,8 +138,6 @@ class UOWBookingSystem {
         bufferWriteFile(un, pw, user.isStaff());
 
         System.out.println("\n---Account created---");
-        //TODO testing readFile()
-        bufferReadFile();
         firstMenu();
     }
 
