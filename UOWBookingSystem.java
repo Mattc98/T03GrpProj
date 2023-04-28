@@ -174,25 +174,30 @@ class UOWBookingSystem {
         //Validation of username and pw from database
         try {
             BufferedReader validater = new BufferedReader(new FileReader("userData.txt"));
-            String line, userLine, pwLine, staffLine;
+            String line;//, userLine, pwLine, staffLine;
             // Could be due to this line
             while ((line = validater.readLine()) != null) {
                 //TODO: Still cannot work
-                userLine = line.split(" ")[0];
-                pwLine = line.split(" ")[1];
-                staffLine = line.split(" ")[2];
-                System.out.printf("User: %s  %s", userLine, user);
-
-                if (userLine.equals(user) && pwLine.equals(userpw))
-                        System.out.print("success");
-                        if (staffLine.equals(true)){
-                            staffMenu();
-                            
-                        }
-                        else if (staffLine.equals(false))
-                            studentMenu();
-                
-                        
+                String[] words = line.split("\\s+");
+                if (words[0].equals(user) && words[1].equals(userpw)){
+                    System.out.print("\n.............\n");
+                    System.out.println("Login successful");
+                    System.out.print(".............\n");
+                    boolean staffValue = Boolean.parseBoolean(words[2]);
+                    if (staffValue){
+                        System.out.println("Welcome Staff member");
+                        staffMenu();
+                    }
+                    else{
+                        System.out.println("Welcome Student");
+                        studentMenu();
+                    }
+                } else {
+                    System.out.print(".............\n");
+                    System.out.println("Username/password is wrong, try again...");
+                    System.out.print(".............\n");
+                    firstMenu();
+                }
             }
             validater.close();
         } catch (FileNotFoundException e){
