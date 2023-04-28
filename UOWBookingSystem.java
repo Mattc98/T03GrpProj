@@ -49,6 +49,10 @@ class UOWBookingSystem {
         }
     }
 
+    private static void loginValidation(String line){
+        
+    }
+
     //Main menu
     private static void firstMenu() {
         //Display
@@ -167,7 +171,39 @@ class UOWBookingSystem {
 
         String userpw = input.nextLine();
 
-        
+        //Validation of username and pw from database
+        try {
+            BufferedReader validater = new BufferedReader(new FileReader("userData.txt"));
+            String line, userLine, pwLine, staffLine;
+            // Could be due to this line
+            while ((line = validater.readLine()) != null) {
+                //TODO: Still cannot work
+                userLine = line.split(" ")[0];
+                pwLine = line.split(" ")[1];
+                staffLine = line.split(" ")[2];
+                System.out.printf("User: %s  %s", userLine, user);
+
+                if (userLine.equals(user) && pwLine.equals(userpw))
+                        System.out.print("success");
+                        if (staffLine.equals(true)){
+                            staffMenu();
+                            
+                        }
+                        else if (staffLine.equals(false))
+                            studentMenu();
+                
+                        
+            }
+            validater.close();
+        } catch (FileNotFoundException e){
+            System.out.println("Database not found");
+            System.out.println("---Exiting Program---");
+            System.exit(1);
+        } catch (IOException e){
+            System.out.println("---Error---");
+            e.printStackTrace();
+        }
+        /* Original ver
         //Redirect to either staff or student
         if (userList.get(userID).getPassword().equals(userpw) && userList.get(userID).getUsername().equals(user)) {
             if (userList.get(userID).isStaff().equals(true)) {
@@ -178,7 +214,7 @@ class UOWBookingSystem {
         } else {
             System.out.println("\n\tWrong la bodoh");
             firstMenu();
-        }
+        }*/
 
     }
 
