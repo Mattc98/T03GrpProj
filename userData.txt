@@ -1,4 +1,2 @@
-root	password	true	
-staff	admin	true	
-student1	123	false	
-student2	234	false	
+root      password       true 
+student   123            false
