@@ -174,7 +174,7 @@ class UOWBookingSystem {
         //Validation of username and pw from database
         try {
             BufferedReader validater = new BufferedReader(new FileReader("userData.txt"));
-            String line;//, userLine, pwLine, staffLine;
+            String line;
             // Could be due to this line
             while ((line = validater.readLine()) != null) {
                 //TODO: Still cannot work
@@ -184,11 +184,12 @@ class UOWBookingSystem {
                     System.out.println("Login successful");
                     System.out.print(".............\n");
                     boolean staffValue = Boolean.parseBoolean(words[2]);
+                    System.out.println("test" + staffValue);
                     if (staffValue){
                         System.out.println("Welcome Staff member");
                         staffMenu();
                     }
-                    else{
+                    else if (!staffValue){
                         System.out.println("Welcome Student");
                         studentMenu();
                     }
