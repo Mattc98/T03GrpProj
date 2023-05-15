@@ -1,37 +1,33 @@
 <html>
     <head>
         <title>Staff Menu</title>
+        <style>
+            table, th, td {
+                border:1px solid black;
+            }
+        </style>
     </head>
     <body>
         <h2>Staff menu</h2>
         <h3>Create a booking</h3>
         <form>
-            - Select room<br/>
-            <input type="radio" name="roomNo" value="rm1">
-            Room 1<br/>
-            <input type="radio" name="roomNo" value="rm2">
-            Room 2<br/>
-            <input type="radio" name="roomNo" value="rm3">
-            Room 3<br/>
-            <input type="radio" name="roomNo" value="rm4">
-            Room 4<br/>
-            <input type="radio" name="roomNo" value="rm5">
-            Room 5<br/>
-
-            - Select date of booking
-            <input type="date" name="roomDate">
-
-            <br/>
-            <br/>
-            - NOT USING FOR STAFF USE FOR STUDENT
-            <select name="time">
-                <option value="" disabled selected>Select your timeslot</option>
-                <option value="slot1">08:00AM - 10:00AM</option>
-                <option value="slot2">10:00AM - 12:00PM</option>
-                <option value="slot3">02:00PM - 04:00PM</option>
-                <option value="slot4">04:00PM - 06:00PM</option>
+            -Select Availbility
+                <select id="Availbility">
+                    <option value ="Unavailable">Unavailable</option>
+                    <option value ="Available">Available</option>
+                </select><br/>
+            - Select room
+            <select id = "room">
+                <option value ="1">Room 1</option>
+                <option value ="2">Room 2</option>
+                <option value ="3">Room 3</option>
+                <option value ="4">Room 4</option>
+                <option value ="5">Room 5</option>
             </select>
             <br/>
+            - Select date of booking
+            <input type="date" id="date">
+            
             <br/>
 
             - Set the price of the room(/hr)
@@ -40,17 +36,43 @@
             
             - Set promocode for room
             <input id="roomCode" type="text">
-            <br/>
-
-            <br/>
-
-            <button>Create Room</button>
+            <br/><br/>
+            <button type = "button" onClick = "createRoom()">Create Room</button>
+            <br/><br/>
+            <table style="width:80%" id = "roomTable">
+                <thead>
+                    <tr style = "height:50px">
+                        <th style = "width:20%">Room no.</th>
+                        <th style = "width:20%">Date</th>
+                        <th style = "width:20%">Price per hr</th>
+                        <th style = "width:20%">PROMOCODE</th>
+                        <th style = "width:20%">Availbility</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+              </table>
         </form>
 
         <!--Javascript-->
         <script>
             function createRoom() {
-                document.getElementById
+                var available = document.getElementById("Availbility").value;
+                var roomNumber = document.getElementById("room").value;
+                var date = document.getElementById("date").value;
+                var d = new Date(date);
+                var price = document.getElementById("roomPrice").value;
+                var code = document.getElementById("roomCode").value;
+
+                var elTable = document.getElementById('roomTable');
+
+                var newRow = elTable.insertRow();
+                newRow.insertCell().innerHTML = roomNumber;
+                newRow.insertCell().innerHTML = d;
+                newRow.insertCell().innerHTML = price;
+                newRow.insertCell().innerHTML = code;
+                newRow.insertCell().innerHTML = available;
             }
         </script>
 

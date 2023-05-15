@@ -30,18 +30,17 @@
                     var email = document.getElementById("email").value;
                     var password = document.getElementById("password").value;
 
-                    if (email === "staff" && password === "123") {
+                    if (email === "staff" && password === "staff") {
                         window.location.replace("UOW_staffmenu.html");
 
                     } 
-                    else if (email === "student" && password === "qwe"){
+                    else if (email === "student" && password === "student"){
                         window.location.replace("UOW_studentmenu.html");
                     }
                     else {
                         alert("Invalid information");
                         return;
                     }
-
                 }
             </script>
     </body>
