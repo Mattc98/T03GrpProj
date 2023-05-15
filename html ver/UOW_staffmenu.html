@@ -44,13 +44,28 @@
 
             <br/>
 
-            <button>Create Room</button>
+            Set availability:
+            <input type="checkbox" name="available" value="a">Available 
+            <input type="checkbox" name="available" value="na">Not Available  
+
+            <br/><br/>
+            <button onClick = "createRoom()">Create Room</button>
         </form>
 
         <!--Javascript-->
         <script>
             function createRoom() {
-                document.getElementById
+                var roomNum, roomDate, roomPrice, roomCode, roomAva;
+                roomNum = document.getElementsByName("roomNo").innerHTML;
+                
+                roomDate = document.getElementsByName("roomDate").values;
+                
+                roomPrice = document.getElementById("roomPrice").values;
+
+                roomCode = document.getElementById("roomCode").values;
+                alert(roomNum + roomDate + roomPrice + roomCode);
+                alert("test");
+                //localStorage.setItem("lastname", "Smith");
             }
         </script>
     </body>
