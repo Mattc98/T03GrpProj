@@ -33,7 +33,11 @@
                     if (email === "staff" && password === "123") {
                         window.location.replace("UOW_staffmenu.html");
 
-                    } else {
+                    } 
+                    else if (email === "student" && password === "qwe"){
+                        window.location.replace("UOW_studentmenu.html");
+                    }
+                    else {
                         alert("Invalid information");
                         return;
                     }
