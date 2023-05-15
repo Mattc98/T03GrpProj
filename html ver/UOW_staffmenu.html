@@ -4,6 +4,11 @@
         <style>
             table, th, td {
                 border:1px solid black;
+                text-align : center;
+            }
+            th, td{
+                height: 50px;
+                width: 9%;
             }
         </style>
     </head>
@@ -18,11 +23,11 @@
                 </select><br/>
             - Select room
             <select id = "room">
-                <option value ="1">Room 1</option>
-                <option value ="2">Room 2</option>
-                <option value ="3">Room 3</option>
-                <option value ="4">Room 4</option>
-                <option value ="5">Room 5</option>
+                <option value ="Room 1">Room 1</option>
+                <option value ="Room 2">Room 2</option>
+                <option value ="Room 3">Room 3</option>
+                <option value ="Room 4">Room 4</option>
+                <option value ="Room 5">Room 5</option>
             </select>
             <br/>
             - Select date of booking
@@ -39,14 +44,16 @@
             <br/><br/>
             <button type = "button" onClick = "createRoom()">Create Room</button>
             <br/><br/>
-            <table style="width:80%" id = "roomTable">
+            <table style="width:70%" id = "roomTable">
                 <thead>
                     <tr style = "height:50px">
-                        <th style = "width:20%">Room no.</th>
-                        <th style = "width:20%">Date</th>
-                        <th style = "width:20%">Price per hr</th>
-                        <th style = "width:20%">PROMOCODE</th>
-                        <th style = "width:20%">Availbility</th>
+                        <th style = "width:9%">Room no.</th>
+                        <th style = "width:9%">Date</th>
+                        <th style = "width:9%">Price per hr</th>
+                        <th style = "width:9%">PROMOCODE</th>
+                        <th style = "width:9%">Availbility</th>
+                        <th style = "width:9%">Remove</th>
+                        <th style = "width:9%">edit</th>
                       </tr>
                 </thead>
                 <tbody>
@@ -65,17 +72,111 @@
                 var price = document.getElementById("roomPrice").value;
                 var code = document.getElementById("roomCode").value;
 
-                var elTable = document.getElementById('roomTable');
+                //var theTable = document.getElementById('roomTable');
 
-                var newRow = elTable.insertRow();
-                newRow.insertCell().innerHTML = roomNumber;
-                newRow.insertCell().innerHTML = d;
-                newRow.insertCell().innerHTML = price;
-                newRow.insertCell().innerHTML = code;
-                newRow.insertCell().innerHTML = available;
+                //var newRow = theTable.insertRow();
+                //newRow.insertCell().innerHTML = roomNumber;
+                //newRow.insertCell().innerHTML = d;
+                //newRow.insertCell().innerHTML = price;
+                //newRow.insertCell().innerHTML = code;
+                //newRow.insertCell().innerHTML = available;
+
+                var tr = document.createElement("tr");
+
+                var td1 = tr.appendChild(document.createElement("td"));
+                var td2 = tr.appendChild(document.createElement("td"));
+                var td3 = tr.appendChild(document.createElement("td"));
+                var td4 = tr.appendChild(document.createElement("td"));
+                var td5 = tr.appendChild(document.createElement("td"));
+                var td6 = tr.appendChild(document.createElement("td"));
+                var td7 = tr.appendChild(document.createElement("td"));
+
+                td1.innerHTML = roomNumber;
+                td2.innerHTML = d;
+                td3.innerHTML = price;
+                td4.innerHTML = code;
+                td5.innerHTML = available;
+                td6.innerHTML = '<button type = "button" onClick = "deleteRoom(this);">REMOVE</button>'
+                td7.innerHTML = '<button type = "button" onClick = "editRoom(this);">EDIT</button>'
+
+
+                document.getElementById("roomTable").appendChild(tr);
             }
+
+            function deleteRoom(Room) {
+                var s = Room.parentNode.parentNode;
+                s.parentNode.removeChild(s);
+            }
+
+            function editRoom(Room) {
+                var available = document.getElementById("Availbility").value;
+                var roomNumber = document.getElementById("room").value;
+                var date = document.getElementById("date").value;
+                var d = new Date(date);
+                var price = document.getElementById("roomPrice").value;
+                var code = document.getElementById("roomCode").value;
+
+                var s = Room.parentNode.parentNode;
+
+                var tr = document.createElement("tr");
+
+                var td1 = tr.appendChild(document.createElement("td"));
+                var td2 = tr.appendChild(document.createElement("td"));
+                var td3 = tr.appendChild(document.createElement("td"));
+                var td4 = tr.appendChild(document.createElement("td"));
+                var td5 = tr.appendChild(document.createElement("td"));
+                var td6 = tr.appendChild(document.createElement("td"));
+                var td7 = tr.appendChild(document.createElement("td"));
+
+                td1.innerHTML = '<select id = "room1"><option value ="Room 1">Room 1</option><option value ="Room 2">Room 2</option><option value ="Room 3">Room 3</option><option value ="Room 4">Room 4</option><option value ="Room 5">Room 5</option></select>';
+                td2.innerHTML = '<input type="date" id="date1">';
+                td3.innerHTML = '<input id="roomPrice1" type="text">';
+                td4.innerHTML = '<input id="roomCode1" type="text">';
+                td5.innerHTML = '<select id="Availbility1"><option value ="Unavailable">Unavailable</option><option value ="Available">Available</option></select><br/>';
+                td6.innerHTML = '<button type = "button" onClick = "deleteRoom(this);">REMOVE</button>'
+                td7.innerHTML = '<button type = "button" onClick = "addeditRoom(this);">UPDATE</button>'
+
+
+                document.getElementById("roomTable").replaceChild(tr, s);
+            }
+
+            function addeditRoom(Room) {
+                var available = document.getElementById("Availbility1").value;
+                var roomNumber = document.getElementById("room1").value;
+                var date = document.getElementById("date1").value;
+                var d = new Date(date1);
+                var price = document.getElementById("roomPrice1").value;
+                var code = document.getElementById("roomCode1").value;
+
+                var s = Room.parentNode.parentNode;
+
+                var tr = document.createElement("tr");
+
+                var td1 = tr.appendChild(document.createElement("td"));
+                var td2 = tr.appendChild(document.createElement("td"));
+                var td3 = tr.appendChild(document.createElement("td"));
+                var td4 = tr.appendChild(document.createElement("td"));
+                var td5 = tr.appendChild(document.createElement("td"));
+                var td6 = tr.appendChild(document.createElement("td"));
+                var td7 = tr.appendChild(document.createElement("td"));
+
+                td1.innerHTML = roomNumber;
+                td2.innerHTML = d;
+                td3.innerHTML = price;
+                td4.innerHTML = code;
+                td5.innerHTML = available;
+                td6.innerHTML = '<button type = "button" onClick = "deleteRoom(this);">REMOVE</button>'
+                td7.innerHTML = '<button type = "button" onClick = "editRoom(this);">UPDATE</button>'
+
+
+                document.getElementById("roomTable").replaceChild(tr, s);
+            }
+
         </script>
 
         <a href="UOW_RoomBookingSystem.html"><button>LOGOUT</button></a>
+       
+   
+
     </body>
 </html>
