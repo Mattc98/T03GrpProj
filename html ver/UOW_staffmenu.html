@@ -72,15 +72,6 @@
                 var price = document.getElementById("roomPrice").value;
                 var code = document.getElementById("roomCode").value;
 
-                //var theTable = document.getElementById('roomTable');
-
-                //var newRow = theTable.insertRow();
-                //newRow.insertCell().innerHTML = roomNumber;
-                //newRow.insertCell().innerHTML = d;
-                //newRow.insertCell().innerHTML = price;
-                //newRow.insertCell().innerHTML = code;
-                //newRow.insertCell().innerHTML = available;
-
                 var tr = document.createElement("tr");
 
                 var td1 = tr.appendChild(document.createElement("td"));
@@ -144,7 +135,7 @@
                 var available = document.getElementById("Availbility1").value;
                 var roomNumber = document.getElementById("room1").value;
                 var date = document.getElementById("date1").value;
-                var d = new Date(date1);
+                var d = new Date(date);
                 var price = document.getElementById("roomPrice1").value;
                 var code = document.getElementById("roomCode1").value;
 
@@ -176,7 +167,5 @@
 
         <a href="UOW_RoomBookingSystem.html"><button>LOGOUT</button></a>
        
-   
-
     </body>
 </html>
