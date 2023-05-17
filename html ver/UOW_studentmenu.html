@@ -42,13 +42,21 @@
         
             
         <script>
+            let available;
+            let roomNumber;
+            let date;
+            let price;
+            let roomSize;
+            let code;
+            let timeslotvalue1;
+
             function getValue(){
-                var available = localStorage.getItem("ava");
-                var roomNumber = localStorage.getItem("roomNo");
-                var date = localStorage.getItem("ddmmyyyy");
-                var price = localStorage.getItem("price");
-                var roomSize = localStorage.getItem("size");
-                var code = localStorage.getItem("promoCode");
+                available = localStorage.getItem("ava");
+                roomNumber = localStorage.getItem("roomNo");
+                date = localStorage.getItem("ddmmyyyy");
+                price = localStorage.getItem("price");
+                roomSize = localStorage.getItem("size");
+                code = localStorage.getItem("promoCode");
 
                 var tr = document.createElement("tr");
 
@@ -78,13 +86,7 @@
             }
 
             function editTime(timeslot1){                
-                var available = localStorage.getItem("ava");
-                var roomNumber = localStorage.getItem("roomNo");
-                var date = localStorage.getItem("ddmmyyyy");
-                var price = localStorage.getItem("price");
-                var roomSize = localStorage.getItem("size");
-                var code = localStorage.getItem("promoCode");
-                var timeslotvalue1 = document.getElementById("timeslotvalue").value;
+                timeslotvalue1 = document.getElementById("timeslotvalue").value;
 
                 var s = timeslot1.parentNode.parentNode;
                 var tr = document.createElement("tr");
@@ -115,12 +117,6 @@
             }
 
             function updateTime(timeslot){
-                var available = localStorage.getItem("ava");
-                var roomNumber = localStorage.getItem("roomNo");
-                var date = localStorage.getItem("ddmmyyyy");
-                var price = localStorage.getItem("price");
-                var roomSize = localStorage.getItem("size");
-                var code = localStorage.getItem("promoCode");
 
                 var s = timeslot.parentNode.parentNode;
                 var tr = document.createElement("tr");
@@ -151,13 +147,7 @@
             }
 
             function removeRoom(room){
-                var available = localStorage.getItem("ava");
-                var roomNumber = localStorage.getItem("roomNo");
-                var date = localStorage.getItem("ddmmyyyy");
-                var price = localStorage.getItem("price");
-                var roomSize = localStorage.getItem("size");
-                var code = localStorage.getItem("promoCode");
-
+                
                 var s = room.parentNode.parentNode;
                 var tr = document.createElement("tr");
 
