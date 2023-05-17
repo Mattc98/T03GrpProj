@@ -1,18 +1,60 @@
 <html>
     <head>
         <title>Student Menu</title>
+        <style>
+            table, th, td {
+                border:1px solid black;
+                text-align : center;
+            }
+            th, td{
+                height: 50px;
+                width: 9%;
+            }
+        </style>
     </head>
     <body>
+        <img src = "simuow.jpg"  alt = "Image of simuow logo"/>
+        <h2>Student menu</h2>
+        <h3>Select a room for booking</h3>
+        <table style="width:70%" id = "roomTable">
+            <thead>
+                <tr style = "height:50px">
+                    <th style = "width:9%">Room no.</th>
+                    <th style = "width:9%">Date</th>
+                    <th style = "width:9%">Price per hr</th>
+                    <th style = "width:9%">PROMOCODE</th>
+                    <th style = "width:9%">Availbility</th>
+                    <th style = "width:9%">Time Slot</th>
+                    <th style = "width:9%">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style = "height:50px">
+                    <th style = "width:9%"><span style = "font-weight: normal;">Room 3</span></th>
+                    <th style = "width:9%"><span style = "font-weight: normal;">Thu May 18 2023 08:00:00 GMT +0800 (Singapore Standard Time)</span></th>
+                    <th style = "width:9%"><span style = "font-weight: normal;">7</span></th>
+                    <th style = "width:9%"><span style = "font-weight: normal;">PROMO10</span></th>
+                    <th style = "width:9%"><span style = "font-weight: normal;">Available</span></th>
+                    <th style = "width:9%" id = "timeslot1"><span style = "font-weight: normal;">
+                        <select id="time">
+                            <option value="" disabled selected>Select your timeslot</option>
+                            <option value="slot1">08:00AM - 10:00AM</option>
+                            <option value="slot2">10:00AM - 12:00PM</option>
+                            <option value="slot3">02:00PM - 04:00PM</option>
+                            <option value="slot4">04:00PM - 06:00PM</option>
+                        </select></span></th>
+                    <th style = "width:9%"><span style = "font-weight: normal;"><button type = "button" onClick = "updateTime(this);">update</button></span></th>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            function updateTime(timeslot){
+                var time = document.getElementById("time").value;
+                alert(time);
+            }
+        </script>
 
-            <select name="time">
-                <option value="" disabled selected>Select your timeslot</option>
-                <option value="slot1">08:00AM - 10:00AM</option>
-                <option value="slot2">10:00AM - 12:00PM</option>
-                <option value="slot3">02:00PM - 04:00PM</option>
-                <option value="slot4">04:00PM - 06:00PM</option>
-            </select>
-
-
+        <br/>
         <a href="UOW_RoomBookingSystem.html"><button>LOGOUT</button></a>
     </body>
 </html>
