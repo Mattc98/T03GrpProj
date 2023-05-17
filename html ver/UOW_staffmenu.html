@@ -85,7 +85,14 @@
                 var code = document.getElementById("roomCode").value;
 
                 var time = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
-                localStorage.setItem("code", code);
+                
+                localStorage.setItem("ava", available);
+                localStorage.setItem("roomNo", roomNumber);
+                localStorage.setItem("ddmmyyyy", time);
+                localStorage.setItem("price", price);
+                localStorage.setItem("size", roomSize);
+                localStorage.setItem("promoCode", code);
+                
                 return false;
 
             }
