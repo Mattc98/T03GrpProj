@@ -12,7 +12,7 @@
             }
         </style>
     </head>
-    <body onload="getValue()">
+    <body onload="passValue()">
         <img src = "simuow.jpg"  alt = "Image of simuow logo"/>
         <h2>Staff menu</h2>
         <h3>Create a booking</h3>
@@ -34,9 +34,9 @@
 
             - Select room size
             <select id="size">
-                <option value="small">Small(1-4 pax)</option>
-                <option value="medium">Medium(5-8 pax)</option>
-                <option value="big">Big(10+ pax)</option>
+                <option value="Small(1-4 pax)">Small(1-4 pax)</option>
+                <option value="Medium(5-8 pax)">Medium(5-8 pax)</option>
+                <option value="Big(10+ pax)">Big(10+ pax)</option>
             </select>
             <br/>
 
@@ -76,25 +76,24 @@
         <!--Javascript-->
         <script>
             function passValue(){
-                var available = document.getElementById("Availbility").value;
-                var roomNumber = document.getElementById("room").value;
-                var date = document.getElementById("date").value;
-                var d = new Date(date);
-                var price = document.getElementById("roomPrice").value;
-                var roomSize = document.getElementById("size").value;
-                var code = document.getElementById("roomCode").value;
+                var available1 = document.getElementById("Availbility").value;
+                var roomNumber1 = document.getElementById("room").value;
+                var date1 = document.getElementById("date").value;
+                var d1 = new Date(date);
+                var price1 = document.getElementById("roomPrice").value;
+                var roomSize1 = document.getElementById("size").value;
+                var code1 = document.getElementById("roomCode").value;
 
-                var time = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+                var time1 = d1.getDate() + '/' + (d1.getMonth() + 1) + '/' + d1.getFullYear();
                 
-                localStorage.setItem("ava", available);
-                localStorage.setItem("roomNo", roomNumber);
-                localStorage.setItem("ddmmyyyy", time);
-                localStorage.setItem("price", price);
-                localStorage.setItem("size", roomSize);
-                localStorage.setItem("promoCode", code);
+                localStorage.setItem("ava", available1);
+                localStorage.setItem("roomNo", roomNumber1);
+                localStorage.setItem("ddmmyyyy", time1);
+                localStorage.setItem("price", price1);
+                localStorage.setItem("size", roomSize1);
+                localStorage.setItem("promoCode", code1);
                 
                 return false;
-
             }
 
             function createRoom() {
@@ -138,15 +137,6 @@
             }
 
             function editRoom(Room) {
-                var available = document.getElementById("Availbility").value;
-                var roomNumber = document.getElementById("room").value;
-                var date = document.getElementById("date").value;
-                var d = new Date(date);
-                var price = document.getElementById("roomPrice").value;
-                var roomSize = document.getElementById("size").value;
-                var code = document.getElementById("roomCode").value;
-
-                var time = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
 
                 var s = Room.parentNode.parentNode;
 
@@ -165,13 +155,15 @@
                 td1.innerHTML = '<select id = "room1"><option value ="Room 1">Room 1</option><option value ="Room 2">Room 2</option><option value ="Room 3">Room 3</option><option value ="Room 4">Room 4</option><option value ="Room 5">Room 5</option></select>';
                 td2.innerHTML = '<input type="date" id="date1">';
                 td3.innerHTML = '<input id="roomPrice1" type="text">';
-                td4.innerHTML = '<select id="size"><option value="small">Small(1-4 pax)</option><option value="medium">Medium(5-8 pax)</option><option value="big">Big(10+ pax)</option></select>';
+                td4.innerHTML = '<select id="size1"><option value="Small(1-4 pax)">Small(1-4 pax)</option><option value="Medium(5-8 pax)">Medium(5-8 pax)</option><option value="Big(10+ pax)">Big(10+ pax)</option></select>';
                 td5.innerHTML = '<input id="roomCode1" type="text">';
                 td6.innerHTML = '<select id="Availbility1"><option value ="Unavailable">Unavailable</option><option value ="Available">Available</option></select><br/>';
                 td7.innerHTML = '<button type = "button" onClick = "deleteRoom(this);">REMOVE</button>'
                 td8.innerHTML = '<button type = "button" onClick = "addeditRoom(this);">UPDATE</button>'
 
                 document.getElementById("roomTable").replaceChild(tr, s);
+
+                
             }
 
             function addeditRoom(Room) {
@@ -180,13 +172,12 @@
                 var date = document.getElementById("date1").value;
                 var d = new Date(date);
                 var price = document.getElementById("roomPrice1").value;
-                var roomSize = document.getElementById("size").value;
+                var roomSize = document.getElementById("size1").value;
                 var code = document.getElementById("roomCode1").value;
 
                 var time = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
 
                 var s = Room.parentNode.parentNode;
-
                 var tr = document.createElement("tr");
 
                 var td1 = tr.appendChild(document.createElement("td"));
@@ -208,7 +199,17 @@
                 td8.innerHTML = '<button type = "button" onClick = "editRoom(this);">UPDATE</button>'
 
 
+                localStorage.setItem("ava", available);
+                localStorage.setItem("roomNo", roomNumber);
+                localStorage.setItem("ddmmyyyy", time);
+                localStorage.setItem("price", price);
+                localStorage.setItem("size", roomSize);
+                localStorage.setItem("promoCode", code);
+
                 document.getElementById("roomTable").replaceChild(tr, s);
+                
+                
+                return false;
             }
 
         </script>
