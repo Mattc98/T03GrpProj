@@ -15,16 +15,23 @@
             }
         </style>
     </head>
-    <body>
+    <body onload="getValue()">
+        <!--School Logo-->
         <img src = "simuow.jpg"  alt = "Image of simuow logo"/>
+
         <h2>Staff menu</h2>
+        
         <h3>Create a booking</h3>
-        <form>
+        
+        <form id="oneRoom">
+            <!--Get user selection-->
             - Select Availbility
-                <select id="Availbility">
-                    <option value ="Unavailable">Unavailable</option>
-                    <option value ="Available">Available</option>
-                </select><br/>
+            <select id="Availbility">
+                <option value ="Unavailable">Unavailable</option>
+                <option value ="Available">Available</option>
+            </select>
+            <br/>
+            
             - Select room
             <select id = "room">
                 <option value ="Room 1">Room 1</option>
@@ -45,7 +52,6 @@
 
             - Select date of booking
             <input type="date" id="date">
-            
             <br/>
 
             - Set the price of the room(/hr)
@@ -55,8 +61,12 @@
             - Set promocode for room
             <input id="roomCode" type="text">
             <br/><br/>
-            <button type = "button" onClick = "createRoom()">Create Room</button>
+
+            <!--Create room button-->
+            <button type = "button" onClick = "createRoom()" onclick="passValue()">Create Room</button>
             <br/><br/>
+
+            <!-- Table display-->
             <table style="width:100%" id = "roomTable">
                 <thead>
                     <tr style = "height:50px">
@@ -70,11 +80,16 @@
                         <th style = "width:9%">Edit</th>
                       </tr>
                 </thead>
+                <!--Body to append in function-->
                 <tbody>
                     
                 </tbody>
               </table>
         </form>
+
+        <button onclick="multiStore()" >Tesy</button>
+
+        <a href="UOW_RoomBookingSystem.html"><button onclick="passValue()">LOGOUT</button></a>
 
         <!--Javascript-->
         <script>
@@ -87,27 +102,86 @@
             let code;
             let time;
 
+            
+            function multiStore(){
+                var x = document.getElementById("roomTable").rows.length;
+                var roomList = [x-1]; //Store all rooms 
+                alert(roomList);
+                //alert(passValue());
+                //alert(getValue());
+                var roomObject = {
+                        "roomNo":roomNumber, 
+                        "ddmmyyyy": time, 
+                        "roomPrice": price, 
+                        "size": roomSize,
+                        "promoCode":code, 
+                        "ava": available};
+
+                for (i = 0; i < x; i++){
+                    //Create variable with number
+                    var rn = "rN" + i;
+
+                    //set room data into roomList
+                    roomList[i] = {
+                        "roomNo":roomNumber, 
+                        "ddmmyyyy": time, 
+                        "roomPrice": price, 
+                        "size": roomSize,
+                        "promoCode":code, 
+                        "ava": available};
+
+                    localStorage.setItem("rn",roomList[i]);
+                    var y = JSON.stringify(localStorage.getItem("rn"));
+                    let pc = y.promoCode;
+                    console.log(pc);
+                    alert("Test " + y);
+
+                    var roomName = "number" + i;
+                    var roomValue = {
+                        "roomNo":roomNumber, 
+                        "ddmmyyyy": time, 
+                        "roomPrice": price, 
+                        "size": roomSize,
+                        "promoCode":code, 
+                        "ava": available};
+
+                    alert(eval(roomName + "=" + roomValue));
+                    
+                    roomList.push(roomName);
+                }
+                alert(roomObject);
+                
+                
+            }
+
+            //Store table
             function passValue(){
+                //Set data from table to local storage
                 localStorage.setItem("ava", available);
                 localStorage.setItem("roomNo", roomNumber);
                 localStorage.setItem("ddmmyyyy", time);
                 localStorage.setItem("price", price);
                 localStorage.setItem("size", roomSize);
                 localStorage.setItem("promoCode", code);
+
+                localStorage.setItem("ava2", available);
+                localStorage.setItem("roomNo2", roomNumber);
+                localStorage.setItem("ddmmyyyy2", time);
+                localStorage.setItem("price2", price);
+                localStorage.setItem("size2", roomSize);
+                localStorage.setItem("promoCode2", code);
                 
                 return false;
             }
 
-            function createRoom() {
-                available = document.getElementById("Availbility").value;
-                roomNumber = document.getElementById("room").value;
-                date = document.getElementById("date").value;
-                d = new Date(date);
-                price = document.getElementById("roomPrice").value;
-                roomSize = document.getElementById("size").value;
-                code = document.getElementById("roomCode").value;
-
-                time = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+            //Keep created table
+            function getValue(){
+                available = localStorage.getItem("ava");
+                roomNumber = localStorage.getItem("roomNo");
+                date = localStorage.getItem("ddmmyyyy");
+                price = localStorage.getItem("price");
+                roomSize = localStorage.getItem("size");
+                code = localStorage.getItem("promoCode");
 
                 var tr = document.createElement("tr");
 
@@ -117,7 +191,7 @@
                 var td4 = tr.appendChild(document.createElement("td"));
                 var td5 = tr.appendChild(document.createElement("td"));
                 var td6 = tr.appendChild(document.createElement("td"));
-                var td7 = tr.appendChild(document.createElement("td"));
+                let td7 = tr.appendChild(document.createElement("td"));
                 var td8 = tr.appendChild(document.createElement("td"));
 
                 td1.innerHTML = roomNumber;
@@ -133,11 +207,52 @@
                 document.getElementById("roomTable").appendChild(tr);
             }
 
+            //Create one room
+            function createRoom() {
+                // get the data from user in the form
+                available = document.getElementById("Availbility").value;
+                roomNumber = document.getElementById("room").value;
+                date = document.getElementById("date").value;
+                d = new Date(date);
+                price = document.getElementById("roomPrice").value;
+                roomSize = document.getElementById("size").value;
+                code = document.getElementById("roomCode").value;
+
+                time = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+
+                //Create tr and td to add data
+                var tr = document.createElement("tr");
+
+                var td1 = tr.appendChild(document.createElement("td"));
+                var td2 = tr.appendChild(document.createElement("td"));
+                var td3 = tr.appendChild(document.createElement("td"));
+                var td4 = tr.appendChild(document.createElement("td"));
+                var td5 = tr.appendChild(document.createElement("td"));
+                var td6 = tr.appendChild(document.createElement("td"));
+                var td7 = tr.appendChild(document.createElement("td"));
+                var td8 = tr.appendChild(document.createElement("td"));
+
+                //add data into the td
+                td1.innerHTML = roomNumber;
+                td2.innerHTML = time;
+                td3.innerHTML = '$' + price + '/hr';
+                td4.innerHTML = roomSize;
+                td5.innerHTML = code;
+                td6.innerHTML = available;
+                td7.innerHTML = '<button type = "button" onClick = "deleteRoom(this);">REMOVE</button>'
+                td8.innerHTML = '<button type = "button" onClick = "editRoom(this);">EDIT</button>'
+
+                //set to the main table
+                document.getElementById("roomTable").appendChild(tr);
+            }
+
+            //Delete room
             function deleteRoom(Room) {
                 var s = Room.parentNode.parentNode;
                 s.parentNode.removeChild(s);
             }
 
+            //Edit room value
             function editRoom(Room) {
                 var s = Room.parentNode.parentNode;
 
@@ -152,13 +267,13 @@
                 var td7 = tr.appendChild(document.createElement("td"));
                 var td8 = tr.appendChild(document.createElement("td"));
 
-
-                td1.innerHTML = '<select id = "room1"><option value ="Room 1">Room 1</option><option value ="Room 2">Room 2</option><option value ="Room 3">Room 3</option><option value ="Room 4">Room 4</option><option value ="Room 5">Room 5</option></select>';
-                td2.innerHTML = '<input type="date" id="date1">';
-                td3.innerHTML = '<input id="roomPrice1" type="text">';
-                td4.innerHTML = '<select id="size1"><option value="Small(1-4 pax)">Small(1-4 pax)</option><option value="Medium(5-8 pax)">Medium(5-8 pax)</option><option value="Big(10+ pax)">Big(10+ pax)</option></select>';
-                td5.innerHTML = '<input id="roomCode1" type="text">';
-                td6.innerHTML = '<select id="Availbility1"><option value ="Unavailable">Unavailable</option><option value ="Available">Available</option></select><br/>';
+                //Allow user to update data here
+                td1.innerHTML = roomNumber + '<br/><select id = "room1"><option value ="Room 1">Room 1</option><option value ="Room 2">Room 2</option><option value ="Room 3">Room 3</option><option value ="Room 4">Room 4</option><option value ="Room 5">Room 5</option></select>';
+                td2.innerHTML = time + '<br/><input type="date" id="date1">';
+                td3.innerHTML = '$' + price + '/hr' +'<br/><input id="roomPrice1" type="text">';
+                td4.innerHTML = roomSize + '<br/><select id="size1"><option value="Small(1-4 pax)">Small(1-4 pax)</option><option value="Medium(5-8 pax)">Medium(5-8 pax)</option><option value="Big(10+ pax)">Big(10+ pax)</option></select>';
+                td5.innerHTML = code + '<br/><input id="roomCode1" type="text">';
+                td6.innerHTML = available + '<br/><select id="Availbility1"><option value ="Unavailable">Unavailable</option><option value ="Available">Available</option></select><br/>';
                 td7.innerHTML = '<button type = "button" onClick = "deleteRoom(this);">REMOVE</button>'
                 td8.innerHTML = '<button type = "button" onClick = "addeditRoom(this);">UPDATE</button>'
 
@@ -206,7 +321,7 @@
 
         </script>
 
-        <a href="UOW_RoomBookingSystem.html"><button onclick="passValue()">LOGOUT</button></a>
+        
        
     </body>
 </html>
