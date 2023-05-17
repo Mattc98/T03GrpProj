@@ -16,10 +16,14 @@
         </style>
     </head>
     <body onload="getValue()">
+        
         <img src = "simuow.jpg"  alt = "Image of simuow logo"/>
+        
         <h2>Student menu</h2>
         
         <h3>Select a room for booking</h3>
+        
+        <!--Table showing available booking-->
         <table style="width:100%" id = "roomTable">
             <thead>
                 <tr style = "height:50px">
@@ -40,7 +44,31 @@
             </tbody>
         </table>
         
-            
+        <br/>
+
+        <table style="width:100%" id = "studentBooking">
+            <thead>
+                <tr style = "height:50px">
+                    <th style = "width:9%">Room no.</th>
+                    <th style = "width:9%">Date</th>
+                    <th style = "width:9%">Total Cost</th>
+                    <th style = "width:9%">Size</th>
+                    <th style = "width:9%">PROMOCODE</th>
+                    <th style = "width:9%">Availbility</th>
+                    <th style = "width:9%">Time Slot</th>
+                    <th style = "width:9%">Edit</th>
+                    <th style = "width:9%">REMOVE</th>
+                    <th style = "width:9%">STATUS</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        
+        <br/>
+        <a href="UOW_RoomBookingSystem.html"><button>LOGOUT</button></a>
+
         <script>
             let available;
             let roomNumber;
@@ -50,6 +78,7 @@
             let code;
             let timeslotvalue1;
 
+            //Display availble booking from staff
             function getValue(){
                 available = localStorage.getItem("ava");
                 roomNumber = localStorage.getItem("roomNo");
@@ -106,7 +135,7 @@
                 td2.innerHTML = date;
                 td3.innerHTML = '$' + price + '/hr';
                 td4.innerHTML = roomSize;
-                td5.innerHTML = code;
+                td5.innerHTML = code; // TODOChange to empty
                 td6.innerHTML = available;
                 td7.innerHTML = '<span style = "font-weight: normal;">' + timeslotvalue1 + '</span>';
                 td8.innerHTML = '<button type = "button" onClick = "updateTime(this);">EDIT</button>';
@@ -175,9 +204,36 @@
 
                 document.getElementById("roomTable").replaceChild(tr, s);
             }
+
+            function addToCart(){
+                var s = timeslot1.parentNode.parentNode;
+                var tr = document.createElement("tr");
+
+                var td1 = tr.appendChild(document.createElement("td"));
+                var td2 = tr.appendChild(document.createElement("td"));
+                var td3 = tr.appendChild(document.createElement("td"));
+                var td4 = tr.appendChild(document.createElement("td"));
+                var td5 = tr.appendChild(document.createElement("td"));
+                var td6 = tr.appendChild(document.createElement("td"));
+                let td7 = tr.appendChild(document.createElement("td"));
+                var td8 = tr.appendChild(document.createElement("td"));
+                var td9 = tr.appendChild(document.createElement("td"));
+                var td10 = tr.appendChild(document.createElement("td"));
+
+                td1.innerHTML = roomNumber;
+                td2.innerHTML = date;
+                td3.innerHTML = '$' + price + '/hr';
+                td4.innerHTML = roomSize;
+                td5.innerHTML = code; // TODOChange to empty
+                td6.innerHTML = available;
+                td7.innerHTML = '<span style = "font-weight: normal;">' + timeslotvalue1 + '</span>';
+                td8.innerHTML = '<button type = "button" onClick = "updateTime(this);">EDIT</button>';
+                td9.innerHTML = '<button type = "button" onClick = "removeRoom(this);">REMOVE</BUTTON>';
+                td10.innerHTML = 'BOOKED';
+
+                document.getElementById("roomTable").replaceChild(tr, s);
+            }
         </script>
 
-        <br/>
-        <a href="UOW_RoomBookingSystem.html"><button>LOGOUT</button></a>
     </body>
 </html>
