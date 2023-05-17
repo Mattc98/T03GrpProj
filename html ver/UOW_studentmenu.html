@@ -16,17 +16,9 @@
         <img src = "simuow.jpg"  alt = "Image of simuow logo"/>
         <h2>Student menu</h2>
         
-        <div id="test1">Test</div>
-        <div id="test2">Test</div>
-        <div id="test3">Test</div>
-        <div id="test4">Test</div>
-        <div id="test5">Test</div>
-        <div id="test6">Test</div>
-        <br/>
-        
         <h3>Select a room for booking</h3>
         <h3>Available rooms:</h3>
-        <table style="width:80%" id = "roomTable">
+        <table style="width:100%" id = "roomTable">
             <thead>
                 <tr style = "height:50px">
                     <th style = "width:9%">Room no.</th>
@@ -38,50 +30,16 @@
                     <th style = "width:9%">Time Slot</th>
                     <th style = "width:9%">Edit</th>
                     <th style = "width:9%">REMOVE</th>
+                    <th style = "width:9%">STATUS</th>
                 </tr>
             </thead>
             <tbody>
-                <tr style = "height:50px">
-                    <th style = "width:9%"><span style = "font-weight: normal;">Room 3</span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;">Thu May 18 2023</span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;">$7</span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;">medium</span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;">PROMO10</span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;">Available</span></th>
-                    <th style = "width:9%" id = "timeslot1"><span style = "font-weight: normal;">
-                        <select id="time">
-                            <option value="" disabled selected>Select your timeslot</option>
-                            <option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option>
-                            <option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option>
-                            <option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option>
-                            <option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option>
-                        </select></span></th>
-                    <th style = "width:9%" id ="editbutton"><button type = "button" onClick = "updateTime(this);">update</button></th>
-                    <th style = "width:9%" id ="editbutton"><button type = "button" onClick = "updateTime(this);">REMOVE</button></th>
-                </tr>
-                <tr style = "height:50px">
-                    <th style = "width:9%"><span style = "font-weight: normal;">Room 4</span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;">Tue May 23 2023</span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;">$9</span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;">small</span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;">PROMO5</span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;">Available</span></th>
-                    <th style = "width:9%" id = "timeslot1"><span style = "font-weight: normal;">
-                        <select id="time">
-                            <option value="" disabled selected>Select your timeslot</option>
-                            <option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option>
-                            <option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option>
-                            <option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option>
-                            <option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option>
-                        </select></span></th>
-                    <th style = "width:9%" id ="editbutton"><button type = "button" onClick = "updateTime(this);">update</button></th>
-                    <th style = "width:9%" id ="editbutton"><button type = "button" onClick = "updateTime(this);">REMOVE</button></th>
-                </tr>
+                
             </tbody>
         </table>
 
         <h3>Your booking:</h3>
-        <table style="width:80%" id = "roomTable">
+        <table style="width:100%" id = "roomTable2">
             <thead>
                 <tr style = "height:50px">
                     <th style = "width:9%">Room no.</th>
@@ -101,26 +59,148 @@
             
         <script>
             function getValue(){
-                document.getElementById("test1").innerHTML = localStorage.getItem("ava");
-                document.getElementById("test2").innerHTML = localStorage.getItem("roomNo");
-                document.getElementById("test3").innerHTML = localStorage.getItem("ddmmyyyy");
-                document.getElementById("test4").innerHTML = localStorage.getItem("price");
-                document.getElementById("test5").innerHTML = localStorage.getItem("size");
-                document.getElementById("test6").innerHTML = localStorage.getItem("promoCode");
-            
-            }
-            function updateTime(timeslot){
-                var time = document.getElementById("time").value;
-                
-                document.getElementById("timeslot1").innerHTML = '<span style = "font-weight: normal;">' + time + '</span>';
-                document.getElementById("editbutton").innerHTML = '<button type = "button" onClick = "editTime(this);">EDIT</button>';
+                var available = localStorage.getItem("ava");
+                var roomNumber = localStorage.getItem("roomNo");
+                var date = localStorage.getItem("ddmmyyyy");
+                var price = localStorage.getItem("price");
+                var roomSize = localStorage.getItem("size");
+                var code = localStorage.getItem("promoCode");
+
+                var tr = document.createElement("tr");
+
+                var td1 = tr.appendChild(document.createElement("td"));
+                var td2 = tr.appendChild(document.createElement("td"));
+                var td3 = tr.appendChild(document.createElement("td"));
+                var td4 = tr.appendChild(document.createElement("td"));
+                var td5 = tr.appendChild(document.createElement("td"));
+                var td6 = tr.appendChild(document.createElement("td"));
+                let td7 = tr.appendChild(document.createElement("td"));
+                var td8 = tr.appendChild(document.createElement("td"));
+                var td9 = tr.appendChild(document.createElement("td"));
+                var td10 = tr.appendChild(document.createElement("td"));
+
+                td1.innerHTML = roomNumber;
+                td2.innerHTML = date;
+                td3.innerHTML = '$' + price;
+                td4.innerHTML = roomSize;
+                td5.innerHTML = code;
+                td6.innerHTML = available;
+                td7.innerHTML = '<span style = "font-weight: normal;"><select id="timeslotvalue"><option value="" disabled selected>Select your timeslot</option><option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option><option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option><option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option><option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option></select></span>';
+                td8.innerHTML = '<button type = "button" onClick = "editTime(this);">BOOK</button>';
+                td9.innerHTML = '<button type = "button" onClick = "removeRoom(this);">REMOVE</BUTTON>';
+                td10.innerHTML = 'VACANT';
+
+                document.getElementById("roomTable").appendChild(tr);
             }
 
             function editTime(timeslot1){                
-                document.getElementById("timeslot1").innerHTML = '<span style = "font-weight: normal;"><select id="time"><option value="" disabled selected>Select your timeslot</option><option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option><option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option><option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option><option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option></select></span>';
-                document.getElementById("editbutton").innerHTML = '<button type = "button" onClick = "updateTime(this);">EDIT</button>';
+                var available = localStorage.getItem("ava");
+                var roomNumber = localStorage.getItem("roomNo");
+                var date = localStorage.getItem("ddmmyyyy");
+                var price = localStorage.getItem("price");
+                var roomSize = localStorage.getItem("size");
+                var code = localStorage.getItem("promoCode");
+                var timeslotvalue1 = document.getElementById("timeslotvalue").value;
+
+                var s = timeslot1.parentNode.parentNode;
+                var tr = document.createElement("tr");
+
+                var td1 = tr.appendChild(document.createElement("td"));
+                var td2 = tr.appendChild(document.createElement("td"));
+                var td3 = tr.appendChild(document.createElement("td"));
+                var td4 = tr.appendChild(document.createElement("td"));
+                var td5 = tr.appendChild(document.createElement("td"));
+                var td6 = tr.appendChild(document.createElement("td"));
+                let td7 = tr.appendChild(document.createElement("td"));
+                var td8 = tr.appendChild(document.createElement("td"));
+                var td9 = tr.appendChild(document.createElement("td"));
+                var td10 = tr.appendChild(document.createElement("td"));
+
+                td1.innerHTML = roomNumber;
+                td2.innerHTML = date;
+                td3.innerHTML = '$' + price;
+                td4.innerHTML = roomSize;
+                td5.innerHTML = code;
+                td6.innerHTML = available;
+                td7.innerHTML = '<span style = "font-weight: normal;">' + timeslotvalue1 + '</span>';
+                td8.innerHTML = '<button type = "button" onClick = "updateTime(this);">EDIT</button>';
+                td9.innerHTML = '<button type = "button" onClick = "removeRoom(this);">REMOVE</BUTTON>';
+                td10.innerHTML = 'BOOKED';
+
+                document.getElementById("roomTable").replaceChild(tr, s);
             }
 
+            function updateTime(timeslot){
+                var available = localStorage.getItem("ava");
+                var roomNumber = localStorage.getItem("roomNo");
+                var date = localStorage.getItem("ddmmyyyy");
+                var price = localStorage.getItem("price");
+                var roomSize = localStorage.getItem("size");
+                var code = localStorage.getItem("promoCode");
+
+                var s = timeslot.parentNode.parentNode;
+                var tr = document.createElement("tr");
+
+                var td1 = tr.appendChild(document.createElement("td"));
+                var td2 = tr.appendChild(document.createElement("td"));
+                var td3 = tr.appendChild(document.createElement("td"));
+                var td4 = tr.appendChild(document.createElement("td"));
+                var td5 = tr.appendChild(document.createElement("td"));
+                var td6 = tr.appendChild(document.createElement("td"));
+                let td7 = tr.appendChild(document.createElement("td"));
+                var td8 = tr.appendChild(document.createElement("td"));
+                var td9 = tr.appendChild(document.createElement("td"));
+                var td10 = tr.appendChild(document.createElement("td"));
+
+                td1.innerHTML = roomNumber;
+                td2.innerHTML = date;
+                td3.innerHTML = '$' + price;
+                td4.innerHTML = roomSize;
+                td5.innerHTML = code;
+                td6.innerHTML = available;
+                td7.innerHTML = '<span style = "font-weight: normal;"><select id="timeslotvalue"><option value="" disabled selected>Select your timeslot</option><option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option><option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option><option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option><option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option></select></span>';
+                td8.innerHTML = '<button type = "button" onClick = "editTime(this);">BOOK</button>';
+                td9.innerHTML = '<button type = "button" onClick = "removeRoom(this);">REMOVE</BUTTON>';
+                td10.innerHTML = 'BOOKED';
+
+                document.getElementById("roomTable").replaceChild(tr, s);
+            }
+
+            function removeRoom(room){
+                var available = localStorage.getItem("ava");
+                var roomNumber = localStorage.getItem("roomNo");
+                var date = localStorage.getItem("ddmmyyyy");
+                var price = localStorage.getItem("price");
+                var roomSize = localStorage.getItem("size");
+                var code = localStorage.getItem("promoCode");
+
+                var s = room.parentNode.parentNode;
+                var tr = document.createElement("tr");
+
+                var td1 = tr.appendChild(document.createElement("td"));
+                var td2 = tr.appendChild(document.createElement("td"));
+                var td3 = tr.appendChild(document.createElement("td"));
+                var td4 = tr.appendChild(document.createElement("td"));
+                var td5 = tr.appendChild(document.createElement("td"));
+                var td6 = tr.appendChild(document.createElement("td"));
+                let td7 = tr.appendChild(document.createElement("td"));
+                var td8 = tr.appendChild(document.createElement("td"));
+                var td9 = tr.appendChild(document.createElement("td"));
+                var td10 = tr.appendChild(document.createElement("td"));
+
+                td1.innerHTML = roomNumber;
+                td2.innerHTML = date;
+                td3.innerHTML = '$' + price;
+                td4.innerHTML = roomSize;
+                td5.innerHTML = code;
+                td6.innerHTML = available;
+                td7.innerHTML = '<span style = "font-weight: normal;"><select id="timeslotvalue"><option value="" disabled selected>Select your timeslot</option><option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option><option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option><option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option><option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option></select></span>';
+                td8.innerHTML = '<button type = "button" onClick = "editTime(this);">BOOK</button>';
+                td9.innerHTML = '<button type = "button" onClick = "updateTime(this);">REMOVE</BUTTON>';
+                td10.innerHTML = 'VACANT';
+
+                document.getElementById("roomTable").replaceChild(tr, s);
+            }
         </script>
 
         <br/>
