@@ -54,7 +54,7 @@
             <br/><br/>
             <button type = "button" onClick = "createRoom()">Create Room</button>
             <br/><br/>
-            <table style="width:70%" id = "roomTable">
+            <table style="width:100%" id = "roomTable">
                 <thead>
                     <tr style = "height:50px">
                         <th style = "width:9%">Room no.</th>
@@ -158,12 +158,11 @@
                 td1.innerHTML = '<select id = "room1"><option value ="Room 1">Room 1</option><option value ="Room 2">Room 2</option><option value ="Room 3">Room 3</option><option value ="Room 4">Room 4</option><option value ="Room 5">Room 5</option></select>';
                 td2.innerHTML = '<input type="date" id="date1">';
                 td3.innerHTML = '<input id="roomPrice1" type="text">';
-                td4.innerHTML = '<select id="size"><option value="small">Small(1-4 pax)</option><option value="medium">Medium(5-8 pax)</option><option value="big">Big(10+ pax)</option></select>'
-                td4.innerHTML = '<input id="roomCode1" type="text">';
-                td5.innerHTML = '<select id="Availbility1"><option value ="Unavailable">Unavailable</option><option value ="Available">Available</option></select><br/>';
-                td6.innerHTML = '<button type = "button" onClick = "deleteRoom(this);">REMOVE</button>'
-                td7.innerHTML = '<button type = "button" onClick = "addeditRoom(this);">UPDATE</button>'
-
+                td4.innerHTML = '<select id="size"><option value="small">Small(1-4 pax)</option><option value="medium">Medium(5-8 pax)</option><option value="big">Big(10+ pax)</option></select>';
+                td5.innerHTML = '<input id="roomCode1" type="text">';
+                td6.innerHTML = '<select id="Availbility1"><option value ="Unavailable">Unavailable</option><option value ="Available">Available</option></select><br/>';
+                td7.innerHTML = '<button type = "button" onClick = "deleteRoom(this);">REMOVE</button>'
+                td8.innerHTML = '<button type = "button" onClick = "addeditRoom(this);">UPDATE</button>'
 
                 document.getElementById("roomTable").replaceChild(tr, s);
             }
