@@ -16,7 +16,7 @@
         <img src = "simuow.jpg"  alt = "Image of simuow logo"/>
         <h2>Student menu</h2>
         <h3>Select a room for booking</h3>
-        <table style="width:70%" id = "roomTable">
+        <table style="width:80%" id = "roomTable">
             <thead>
                 <tr style = "height:50px">
                     <th style = "width:9%">Room no.</th>
@@ -26,6 +26,7 @@
                     <th style = "width:9%">Availbility</th>
                     <th style = "width:9%">Time Slot</th>
                     <th style = "width:9%">Edit</th>
+                    <th style = "width:9%">REMOVE</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,20 +39,46 @@
                     <th style = "width:9%" id = "timeslot1"><span style = "font-weight: normal;">
                         <select id="time">
                             <option value="" disabled selected>Select your timeslot</option>
-                            <option value="slot1">08:00AM - 10:00AM</option>
-                            <option value="slot2">10:00AM - 12:00PM</option>
-                            <option value="slot3">02:00PM - 04:00PM</option>
-                            <option value="slot4">04:00PM - 06:00PM</option>
+                            <option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option>
+                            <option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option>
+                            <option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option>
+                            <option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option>
                         </select></span></th>
-                    <th style = "width:9%"><span style = "font-weight: normal;"><button type = "button" onClick = "updateTime(this);">update</button></span></th>
+                    <th style = "width:9%" id ="editbutton"><button type = "button" onClick = "updateTime(this);">update</button></th>
+                    <th style = "width:9%" id ="editbutton"><button type = "button" onClick = "updateTime(this);">REMOVE</button></th>
+                </tr>
+                <tr style = "height:50px">
+                    <th style = "width:9%"><span style = "font-weight: normal;">Room 4</span></th>
+                    <th style = "width:9%"><span style = "font-weight: normal;">Tue May 23 2023 08:00:00 GMT +0800 (Singapore Standard Time)</span></th>
+                    <th style = "width:9%"><span style = "font-weight: normal;">9</span></th>
+                    <th style = "width:9%"><span style = "font-weight: normal;">PROMO5</span></th>
+                    <th style = "width:9%"><span style = "font-weight: normal;">Available</span></th>
+                    <th style = "width:9%" id = "timeslot1"><span style = "font-weight: normal;">
+                        <select id="time">
+                            <option value="" disabled selected>Select your timeslot</option>
+                            <option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option>
+                            <option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option>
+                            <option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option>
+                            <option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option>
+                        </select></span></th>
+                    <th style = "width:9%" id ="editbutton"><button type = "button" onClick = "updateTime(this);">update</button></th>
+                    <th style = "width:9%" id ="editbutton"><button type = "button" onClick = "updateTime(this);">REMOVE</button></th>
                 </tr>
             </tbody>
         </table>
         <script>
             function updateTime(timeslot){
                 var time = document.getElementById("time").value;
-                alert(time);
+                
+                document.getElementById("timeslot1").innerHTML = '<span style = "font-weight: normal;">' + time + '</span>';
+                document.getElementById("editbutton").innerHTML = '<button type = "button" onClick = "editTime(this);">EDIT</button>';
             }
+
+            function editTime(timeslot1){                
+                document.getElementById("timeslot1").innerHTML = '<span style = "font-weight: normal;"><select id="time"><option value="" disabled selected>Select your timeslot</option><option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option><option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option><option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option><option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option></select></span>';
+                document.getElementById("editbutton").innerHTML = '<button type = "button" onClick = "updateTime(this);">EDIT</button>';
+            }
+
         </script>
 
         <br/>
