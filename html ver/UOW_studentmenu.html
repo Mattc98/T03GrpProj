@@ -35,7 +35,6 @@
                     <th style = "width:9%">Availbility</th>
                     <th style = "width:9%">Time Slot</th>
                     <th style = "width:9%">Edit</th>
-                    <th style = "width:9%">REMOVE</th>
                     <th style = "width:9%">STATUS</th>
                 </tr>
             </thead>
@@ -80,6 +79,7 @@
             let roomSize;
             let code;
             let timeslotvalue1;
+            let usercode;
 
             //Display availble booking from staff
             function getValue(){
@@ -103,7 +103,6 @@
                 let td7 = tr.appendChild(document.createElement("td"));
                 var td8 = tr.appendChild(document.createElement("td"));
                 var td9 = tr.appendChild(document.createElement("td"));
-                var td10 = tr.appendChild(document.createElement("td"));
 
                 //Add the data into table
                 td1.innerHTML = roomNumber;
@@ -122,41 +121,56 @@
                                         '<option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option>' +
                                     '</select>' +
                                     '</span>';
-                td8.innerHTML = '<button type = "button" onClick = "editTime(this)" onClick="addToCart()";>BOOK</button>';
-                td9.innerHTML = '<button type = "button">REMOVE</BUTTON>';
-                td10.innerHTML = 'VACANT';
+                td8.innerHTML = '<button type = "button" onClick="addToCart();deleteRoom(this);">BOOK</button>';
+                td9.innerHTML = 'VACANT';
 
                 document.getElementById("roomTable").appendChild(tr);
             }
 
             function addToCart(){
                 timeslotvalue1 = document.getElementById("selectTimeSlot").value;
+                usercode = document.getElementById("getPromo").value;
 
-                var tr1 = document.createElement("tr");
+                var tr = document.createElement("tr");
 
-                var td11 = tr1.appendChild(document.createElement("td"));
-                var td21 = tr1.appendChild(document.createElement("td"));
-                var td31 = tr1.appendChild(document.createElement("td"));
-                var td41 = tr1.appendChild(document.createElement("td"));
-                var td51 = tr1.appendChild(document.createElement("td"));
-                var td61 = tr1.appendChild(document.createElement("td"));
-                let td71 = tr1.appendChild(document.createElement("td"));
-                var td81 = tr1.appendChild(document.createElement("td"));
-                var td91 = tr1.appendChild(document.createElement("td"));
-                var td101 = tr1.appendChild(document.createElement("td"));
+                var td1 = tr.appendChild(document.createElement("td"));
+                var td2 = tr.appendChild(document.createElement("td"));
+                var td3 = tr.appendChild(document.createElement("td"));
+                var td4 = tr.appendChild(document.createElement("td"));
+                var td5 = tr.appendChild(document.createElement("td"));
+                var td6 = tr.appendChild(document.createElement("td"));
+                let td7 = tr.appendChild(document.createElement("td"));
+                var td8 = tr.appendChild(document.createElement("td"));
+                var td9 = tr.appendChild(document.createElement("td"));
+                var td10 = tr.appendChild(document.createElement("td"));
 
-                td11.innerHTML = roomNumber;
-                td21.innerHTML = date;
-                td31.innerHTML = '$' + price * 2;
-                td41.innerHTML = roomSize;
-                td51.innerHTML; 
-                td61.innerHTML = available;
-                td71.innerHTML = '<span style = "font-weight: normal;">' + timeslotvalue1 + '</span>';
-                td81.innerHTML = '<button type = "button" onClick = "updateTime(this);">EDIT</button>';
-                td91.innerHTML = '<button type = "button" onClick = "removeRoom(this);">REMOVE</BUTTON>';
-                td101.innerHTML = 'PENDING';
+                if(usercode == code){
+                    td1.innerHTML = roomNumber;
+                    td2.innerHTML = date;
+                    td3.innerHTML = '$' + ((price * 2)*.9);
+                    td4.innerHTML = roomSize;
+                    td5.innerHTML = "10% off"; 
+                    td6.innerHTML = available;
+                    td7.innerHTML = '<span style = "font-weight: normal;">' + timeslotvalue1 + '</span>';
+                    td8.innerHTML = '<button type = "button" onClick = "updateTime(this);">EDIT</button>';
+                    td9.innerHTML = '<button type = "button" onClick = "removeRoom(this);deleteRoom(this);">REMOVE</BUTTON>';
+                    td10.innerHTML = 'BOOKED';
+                }
+                else{
+                    td1.innerHTML = roomNumber;
+                    td2.innerHTML = date;
+                    td3.innerHTML = '$' + (price * 2);
+                    td4.innerHTML = roomSize;
+                    td5.innerHTML = "invalid code"; 
+                    td6.innerHTML = available;
+                    td7.innerHTML = '<span style = "font-weight: normal;">' + timeslotvalue1 + '</span>';
+                    td8.innerHTML = '<button type = "button" onClick = "updateTime(this);">EDIT</button>';
+                    td9.innerHTML = '<button type = "button" onClick = "removeRoom(this);deleteRoom(this)">REMOVE</BUTTON>';
+                    td10.innerHTML = 'BOOKED';
+                }
+    
 
-                document.getElementById("studentBooking").appendChild(tr1);
+                document.getElementById("studentBooking").appendChild(tr);
             }
 
             function editTime(timeslot1){                
@@ -222,9 +236,9 @@
 
             function removeRoom(room){
                 
-                var s = room.parentNode.parentNode;
                 var tr = document.createElement("tr");
 
+                // Create rest of table 
                 var td1 = tr.appendChild(document.createElement("td"));
                 var td2 = tr.appendChild(document.createElement("td"));
                 var td3 = tr.appendChild(document.createElement("td"));
@@ -236,18 +250,33 @@
                 var td9 = tr.appendChild(document.createElement("td"));
                 var td10 = tr.appendChild(document.createElement("td"));
 
+                //Add the data into table
                 td1.innerHTML = roomNumber;
                 td2.innerHTML = date;
                 td3.innerHTML = '$' + price + '/hr';
                 td4.innerHTML = roomSize;
-                td5.innerHTML = code;
+                td5.innerHTML = '<input id="getPromo" type="text">'; 
                 td6.innerHTML = available;
-                td7.innerHTML = '<span style = "font-weight: normal;"><select id="timeslotvalue"><option value="" disabled selected>Select your timeslot</option><option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option><option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option><option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option><option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option></select></span>';
-                td8.innerHTML = '<button type = "button" onClick = "editTime(this);">BOOK</button>';
-                td9.innerHTML = '<button type = "button" onClick = "updateTime(this);">REMOVE</BUTTON>';
+                
+                td7.innerHTML = '<span style = "font-weight: normal;">' +
+                                    '<select id="selectTimeSlot">' +
+                                        '<option value="" disabled selected>Select your timeslot</option>' +
+                                        '<option value="08:00AM - 10:00AM">08:00AM - 10:00AM</option>' +
+                                        '<option value="10:00AM - 12:00PM">10:00AM - 12:00PM</option>' +
+                                        '<option value="02:00PM - 04:00PM">02:00PM - 04:00PM</option>' +
+                                        '<option value="04:00PM - 06:00PM">04:00PM - 06:00PM</option>' +
+                                    '</select>' +
+                                    '</span>';
+                td8.innerHTML = '<button type = "button" onClick="addToCart();deleteRoom(this);">BOOK</button>';
+                td9.innerHTML = '<button type = "button">REMOVE</BUTTON>';
                 td10.innerHTML = 'VACANT';
 
-                document.getElementById("roomTable").replaceChild(tr, s);
+                document.getElementById("roomTable").appendChild(tr);
+            }
+
+            function deleteRoom(Room) {
+                var s = Room.parentNode.parentNode;
+                s.parentNode.removeChild(s);
             }
 
             
