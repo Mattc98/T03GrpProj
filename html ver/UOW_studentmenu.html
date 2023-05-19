@@ -292,7 +292,6 @@
                 let td7 = tr.appendChild(document.createElement("td"));
                 var td8 = tr.appendChild(document.createElement("td"));
                 var td9 = tr.appendChild(document.createElement("td"));
-                var td10 = tr.appendChild(document.createElement("td"));
 
                 //Add the data into table
                 td1.innerHTML = roomNumber;
@@ -312,8 +311,7 @@
                                     '</select>' +
                                     '</span>';
                 td8.innerHTML = '<button type = "button" onClick="addToCart();deleteRoom(this);">BOOK</button>';
-                td9.innerHTML = '<button type = "button">REMOVE</BUTTON>';
-                td10.innerHTML = 'VACANT';
+                td9.innerHTML = 'VACANT';
 
                 document.getElementById("roomTable").appendChild(tr);
             }
