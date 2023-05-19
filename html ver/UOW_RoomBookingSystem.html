@@ -2,13 +2,40 @@
     <head>
         <title>UOW Room Booking System</title>
         <style>
-            
+            body{
+                margin: 0;
+                padding: 0;
+                font-family: montserrat;
+                background: linear-gradient(120deg, #2980b9, #8e44ad);
+                height: 100vh;
+                overflow: hidden;
+            }
+            .center {
+                position:absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 400px;
+                background: white;
+                border-radius: 10px;
+            }
+            .center h1{
+                text-align: center;
+                padding: 0 0 20px 0;
+                border-bottom: 1px solid silver;
+
+            }
+            .center form{
+                padding: 0 40px;
+                box-sizing: border-box;
+                
+            }
         </style>
     </head>
 
     <body>
-        
-            <img src = "simuow.jpg"  alt = "Image of simuow logo"/>
+        <div class="center">
+
 
             <h1>LOGIN PAGE</h1>
             <form id="form" action="" method="GET">
@@ -46,5 +73,6 @@
                     }
                 }
             </script>
+        </div>
     </body>
 </html>
