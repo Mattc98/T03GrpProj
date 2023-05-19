@@ -139,57 +139,6 @@
             let code;
             let time;
 
-            
-            function multiStore(){
-                var x = document.getElementById("roomTable").rows.length;
-                var roomList = [x-1]; //Store all rooms 
-                alert(roomList);
-                //alert(passValue());
-                //alert(getValue());
-                var roomObject = {
-                        "roomNo":roomNumber, 
-                        "ddmmyyyy": time, 
-                        "roomPrice": price, 
-                        "size": roomSize,
-                        "promoCode":code, 
-                        "ava": available};
-
-                for (i = 0; i < x; i++){
-                    //Create variable with number
-                    var rn = "rN" + i;
-
-                    //set room data into roomList
-                    roomList[i] = {
-                        "roomNo":roomNumber, 
-                        "ddmmyyyy": time, 
-                        "roomPrice": price, 
-                        "size": roomSize,
-                        "promoCode":code, 
-                        "ava": available};
-
-                    localStorage.setItem("rn",roomList[i]);
-                    var y = JSON.stringify(localStorage.getItem("rn"));
-                    let pc = y.promoCode;
-                    console.log(pc);
-                    alert("Test " + y);
-
-                    var roomName = "number" + i;
-                    var roomValue = {
-                        "roomNo":roomNumber, 
-                        "ddmmyyyy": time, 
-                        "roomPrice": price, 
-                        "size": roomSize,
-                        "promoCode":code, 
-                        "ava": available};
-
-                    alert(eval(roomName + "=" + roomValue));
-                    
-                    roomList.push(roomName);
-                }
-                alert(roomObject);
-                
-                
-            }
 
             //Store table
             function passValue(){
