@@ -2,6 +2,14 @@
     <head>
         <title>Staff Menu</title>
         <style>
+            body{
+                margin: 0;
+                padding: 0;
+                font-family: montserrat;
+                background: linear-gradient(120deg, #2980b9, #8e44ad);
+                height: 100vh;
+                overflow: hidden;
+            }
             table, th, td {
                 border:1px solid black;
                 text-align : center;
@@ -13,11 +21,40 @@
             thead{
                 background-color: lightgrey;
             }
+            .center {
+                position:absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 1000px;
+                height: 550px;
+                background: white;
+                border-radius: 10px;
+            }
+            .center h2, h3{
+                text-align: center;
+                padding: 0 0 20px 0;
+                border-bottom: 1px solid silver;
+            }
+            .center form{
+                padding: 0 40px;
+                box-sizing: border-box;  
+            }
+            .center .select {
+                text-align: center;
+                padding: 0 0 20px 0;
+                border-bottom: 1px solid silver;
+            }
+            body, a {
+                text-align: center;
+                padding: 0 0 20px 0;
+                
+            }
+
         </style>
     </head>
     <body onload="getValue()">
-        <!--School Logo-->
-        <img src = "simuow.jpg"  alt = "Image of simuow logo"/>
+        <div class = "center">
 
         <h2>Staff menu</h2>
         
@@ -25,70 +62,76 @@
         
         <form id="oneRoom">
             <!--Get user selection-->
-            - Select Availbility
-            <select id="Availbility">
-                <option value ="Unavailable">Unavailable</option>
-                <option value ="Available">Available</option>
-            </select>
-            <br/>
+            <div class = "select">
+                - Select Availbility
+                <select id="Availbility">
+                    <option value ="Unavailable">Unavailable</option>
+                    <option value ="Available">Available</option>
+                </select>
+                <br/>
+                
+                - Select room
+                <select id = "room">
+                    <option value ="Room 1">Room 1</option>
+                    <option value ="Room 2">Room 2</option>
+                    <option value ="Room 3">Room 3</option>
+                    <option value ="Room 4">Room 4</option>
+                    <option value ="Room 5">Room 5</option>
+                </select>
+                <br/>
+    
+                - Select room size
+                <select id="size">
+                    <option value="Small(1-4 pax)">Small(1-4 pax)</option>
+                    <option value="Medium(5-8 pax)">Medium(5-8 pax)</option>
+                    <option value="Big(10+ pax)">Big(10+ pax)</option>
+                </select>
+                <br/>
+    
+                - Select date of booking
+                <input type="date" id="date">
+                <br/>
+    
+                - Set the price of the room(/hr)
+                <input id="roomPrice" type="text">
+                <br/> 
+                
+                - Set promocode for room
+                <input id="roomCode" type="text">
+                <br/><br/>
+    
+                <!--Create room button-->
+                <button type = "button" onClick = "createRoom()" onclick="passValue()">Create Room</button>
+                <br/><br/>
             
-            - Select room
-            <select id = "room">
-                <option value ="Room 1">Room 1</option>
-                <option value ="Room 2">Room 2</option>
-                <option value ="Room 3">Room 3</option>
-                <option value ="Room 4">Room 4</option>
-                <option value ="Room 5">Room 5</option>
-            </select>
-            <br/>
+          
 
-            - Select room size
-            <select id="size">
-                <option value="Small(1-4 pax)">Small(1-4 pax)</option>
-                <option value="Medium(5-8 pax)">Medium(5-8 pax)</option>
-                <option value="Big(10+ pax)">Big(10+ pax)</option>
-            </select>
-            <br/>
+                <!-- Table display-->
+                <table style="width:100%" id = "roomTable">
+                    <thead>
+                        <tr style = "height:50px">
+                            <th style = "width:9%">Room no.</th>
+                            <th style = "width:9%">Date</th>
+                            <th style = "width:9%">Price per hr</th>
+                            <th style = "width:9%">Size</th>
+                            <th style = "width:9%">PROMOCODE</th>
+                            <th style = "width:9%">Availbility</th>
+                            <th style = "width:9%">Remove</th>
+                            <th style = "width:9%">Edit</th>
+                        </tr>
+                    </thead>
+                    <!--Body to append in function-->
+                    <tbody>
+                        
+                    </tbody>
+                </table>
 
-            - Select date of booking
-            <input type="date" id="date">
-            <br/>
+                <br/>
 
-            - Set the price of the room(/hr)
-            <input id="roomPrice" type="text">
-            <br/> 
-            
-            - Set promocode for room
-            <input id="roomCode" type="text">
-            <br/><br/>
 
-            <!--Create room button-->
-            <button type = "button" onClick = "createRoom()" onclick="passValue()">Create Room</button>
-            <br/><br/>
-
-            <!-- Table display-->
-            <table style="width:100%" id = "roomTable">
-                <thead>
-                    <tr style = "height:50px">
-                        <th style = "width:9%">Room no.</th>
-                        <th style = "width:9%">Date</th>
-                        <th style = "width:9%">Price per hr</th>
-                        <th style = "width:9%">Size</th>
-                        <th style = "width:9%">PROMOCODE</th>
-                        <th style = "width:9%">Availbility</th>
-                        <th style = "width:9%">Remove</th>
-                        <th style = "width:9%">Edit</th>
-                      </tr>
-                </thead>
-                <!--Body to append in function-->
-                <tbody>
-                    
-                </tbody>
-              </table>
+            </div>
         </form>
-
-        <a href="UOW_RoomBookingSystem.html"><button onclick="passValue()">LOGOUT</button></a>
-
+                <a href="UOW_RoomBookingSystem.html"><button onclick="passValue()">LOGOUT</button></a>
         <!--Javascript-->
         <script>
             let available;
@@ -320,6 +363,6 @@
         </script>
 
         
-       
+    </div>
     </body>
 </html>

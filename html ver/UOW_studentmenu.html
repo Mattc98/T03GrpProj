@@ -13,63 +13,98 @@
             thead{
                 background-color: lightgrey;
             }
+            body{
+                margin: 0;
+                padding: 0;
+                font-family: montserrat;
+                background: linear-gradient(120deg, #2980b9, #8e44ad);
+                height: 100vh;
+                overflow: hidden;
+            }
+            .center {
+                position:absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 1500px;
+                height: 500px;
+                background: white;
+                border-radius: 10px;
+            }
+            .center h2, h3{
+                text-align: center;
+                padding: 0 0 20px 0;
+                border-bottom: 1px solid silver;
+            }
+            .center table{
+                margin-left: auto;
+                margin-right: auto;
+            }
+            body, a {
+                text-align: center;
+                padding: 0 0 20px 0;
+                
+            }
         </style>
     </head>
     <body onload="getValue()">
         
-        <img src = "simuow.jpg"  alt = "Image of simuow logo"/>
+        <div class = "center">
+            <h2>Student menu</h2>
         
-        <h2>Student menu</h2>
+            <h3>Select a room for booking</h3>
+            
+            <!--Table showing available booking-->
+            <table style="width: 90%" id = "roomTable">
+                <thead>
+                    <tr style = "height:50px">
+                        <th style = "width:9%">Room no.</th>
+                        <th style = "width:9%">Date</th>
+                        <th style = "width:9%">Price per hr</th>
+                        <th style = "width:9%">Size</th>
+                        <th style = "width:9%">PROMOCODE</th>
+                        <th style = "width:9%">Availbility</th>
+                        <th style = "width:9%">Time Slot</th>
+                        <th style = "width:9%">Edit</th>
+                        <th style = "width:9%">STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            
+            <br/>
+            <hr/>
+            <h3>Confirm your room for booking</h3>
+            <!--Table showing student bookings-->
+            <table style="width:90%" id = "studentBooking">
+                <thead>
+                    <tr style = "height:50px">
+                        <th style = "width:9%">Room no.</th>
+                        <th style = "width:9%">Date</th>
+                        <th style = "width:9%">Total Cost</th>
+                        <th style = "width:9%">Size</th>
+                        <th style = "width:9%">PROMOCODE</th>
+                        <th style = "width:9%">Availbility</th>
+                        <th style = "width:9%">Time Slot</th>
+                        <th style = "width:9%">Edit</th>
+                        <th style = "width:9%">REMOVE</th>
+                        <th style = "width:9%">STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            
+            <!--Logout button-->
+            <br/>
+            <a href="UOW_RoomBookingSystem.html"><button>LOGOUT</button></a>
+
+        </div>
         
-        <h3>Select a room for booking</h3>
-        
-        <!--Table showing available booking-->
-        <table style="width:100%" id = "roomTable">
-            <thead>
-                <tr style = "height:50px">
-                    <th style = "width:9%">Room no.</th>
-                    <th style = "width:9%">Date</th>
-                    <th style = "width:9%">Price per hr</th>
-                    <th style = "width:9%">Size</th>
-                    <th style = "width:9%">PROMOCODE</th>
-                    <th style = "width:9%">Availbility</th>
-                    <th style = "width:9%">Time Slot</th>
-                    <th style = "width:9%">Edit</th>
-                    <th style = "width:9%">STATUS</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
-        
-        <br/>
-        <hr/>
-        <h3>Confirm your room for booking</h3>
-        <!--Table showing student bookings-->
-        <table style="width:100%" id = "studentBooking">
-            <thead>
-                <tr style = "height:50px">
-                    <th style = "width:9%">Room no.</th>
-                    <th style = "width:9%">Date</th>
-                    <th style = "width:9%">Total Cost</th>
-                    <th style = "width:9%">Size</th>
-                    <th style = "width:9%">PROMOCODE</th>
-                    <th style = "width:9%">Availbility</th>
-                    <th style = "width:9%">Time Slot</th>
-                    <th style = "width:9%">Edit</th>
-                    <th style = "width:9%">REMOVE</th>
-                    <th style = "width:9%">STATUS</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
-        
-        <!--Logout button-->
-        <br/>
-        <a href="UOW_RoomBookingSystem.html"><button>LOGOUT</button></a>
+      
 
         <script>
             let available;
