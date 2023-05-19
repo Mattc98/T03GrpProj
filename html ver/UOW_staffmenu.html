@@ -5,7 +5,7 @@
             body{
                 margin: 0;
                 padding: 0;
-                font-family: montserrat;
+                font-family: 'poppins', sans-serif;
                 background: linear-gradient(120deg, #2980b9, #8e44ad);
                 height: 100vh;
                 overflow: hidden;
@@ -26,7 +26,7 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 1000px;
+                width: 1400px;
                 height: 550px;
                 background: white;
                 border-radius: 10px;
@@ -38,12 +38,9 @@
             }
             .center form{
                 padding: 0 40px;
-                box-sizing: border-box;  
             }
             .center .select {
-                text-align: center;
                 padding: 0 0 20px 0;
-                border-bottom: 1px solid silver;
             }
             body, a {
                 text-align: center;
@@ -58,7 +55,7 @@
 
         <h2>Staff menu</h2>
         
-        <h3>Create a booking</h3>
+        <h3>Create a room for booking</h3>
         
         <form id="oneRoom">
             <!--Get user selection-->
@@ -104,7 +101,7 @@
                 <button type = "button" onClick = "createRoom()" onclick="passValue()">Create Room</button>
                 <br/><br/>
             
-          
+            </div>
 
                 <!-- Table display-->
                 <table style="width:100%" id = "roomTable">
@@ -128,8 +125,7 @@
 
                 <br/>
 
-
-            </div>
+            
         </form>
                 <a href="UOW_RoomBookingSystem.html"><button onclick="passValue()">LOGOUT</button></a>
         <!--Javascript-->

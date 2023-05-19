@@ -5,7 +5,7 @@
             body{
                 margin: 0;
                 padding: 0;
-                font-family: montserrat;
+                font-family: 'poppins', sans-serif;
                 background: linear-gradient(120deg, #2980b9, #8e44ad);
                 height: 100vh;
                 overflow: hidden;
@@ -16,20 +16,42 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 width: 400px;
-                background: white;
+                background: transparent;
                 border-radius: 10px;
+                color: white
             }
             .center h1{
                 text-align: center;
                 padding: 0 0 20px 0;
-                border-bottom: 1px solid silver;
 
             }
             .center form{
-                padding: 0 40px;
+                text-align: center;
+                padding: 0 30px;
                 box-sizing: border-box;
-                
+
             }
+            .center input{
+                font-size: 17px;
+                text-align: center;
+                width: 50%;
+                height: 40px;
+                border: none;
+                outline: none;
+                background: transparent;
+                border-bottom: 2px solid silver;
+
+                color: white;
+            }
+            .center button{
+                width: 60%;
+                height: 40px;
+                border-radius: 40px;
+                border: none;
+                outline: none;
+
+            }
+            
         </style>
     </head>
 
@@ -40,18 +62,20 @@
             <h1>LOGIN PAGE</h1>
             <form id="form" action="" method="GET">
                 <div class="form-group">
-                    <label>Username:</label><br/>
+                    <label>Username</label><br/>
                     <input type="email"  id="email" class="form-control" >
                 </div>
-
+                <br/>
                 <div class="form-group">
-                    <label>Password:</label><br/>
+                    <label>Password</label><br/>
                     <input type="password" id="password" class="form-control" >
                 </div>
                 <br/>
                 <button type="login" onClick="login()">LOGIN</button>
                 <br/>
-                Don't have an account? Sign Up <a href="UOW_createAccount.html">here</a>
+                <p>
+                    Don't have an account? Sign Up <a href="UOW_createAccount.html">here</a>
+                </p>
 
             </form>
             
