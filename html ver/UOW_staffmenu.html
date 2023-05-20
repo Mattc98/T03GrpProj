@@ -5,10 +5,15 @@
             body{
                 margin: 0;
                 padding: 0;
-                font-family: 'poppins', sans-serif;
+                font-family: Helvetica, sans-serif;
                 background: linear-gradient(120deg, #2980b9, #8e44ad);
-                height: 100vh;
+                min-height: 100vh;
                 overflow: hidden;
+                color: #fff;
+                display: flex;
+                flex-wrap: wrap;
+                text-align: center;
+                padding: 0 0 20px 0;
             }
             table, th, td {
                 border:1px solid black;
@@ -19,8 +24,13 @@
                 width: 9%;
             }
             thead{
-                background-color: lightgrey;
+                background: #2a2f3b;
             }
+            button, input, select{
+                background: #323741;
+                color: #fff;
+            }
+            
             .center {
                 position:absolute;
                 top: 50%;
@@ -28,7 +38,7 @@
                 transform: translate(-50%, -50%);
                 width: 1400px;
                 height: 550px;
-                background: white;
+                background: #23242a;
                 border-radius: 10px;
             }
             .center h2, h3{
@@ -40,12 +50,8 @@
                 padding: 0 40px;
             }
             .center .select {
-                padding: 0 0 20px 0;
-            }
-            body, a {
-                text-align: center;
-                padding: 0 0 20px 0;
                 
+                padding: 0 0 20px 0;
             }
 
         </style>
@@ -60,14 +66,14 @@
         <form id="oneRoom">
             <!--Get user selection-->
             <div class = "select">
-                - Select Availbility
+                Select Availbility
                 <select id="Availbility">
                     <option value ="Unavailable">Unavailable</option>
                     <option value ="Available">Available</option>
                 </select>
                 <br/>
                 
-                - Select room
+                Select room
                 <select id = "room">
                     <option value ="Room 1">Room 1</option>
                     <option value ="Room 2">Room 2</option>
@@ -77,7 +83,7 @@
                 </select>
                 <br/>
     
-                - Select room size
+                Select room size
                 <select id="size">
                     <option value="Small(1-4 pax)">Small(1-4 pax)</option>
                     <option value="Medium(5-8 pax)">Medium(5-8 pax)</option>
@@ -85,15 +91,15 @@
                 </select>
                 <br/>
     
-                - Select date of booking
+                Select date of booking
                 <input type="date" id="date">
                 <br/>
     
-                - Set the price of the room(/hr)
+                Set the price of the room(/hr)
                 <input id="roomPrice" type="text">
                 <br/> 
                 
-                - Set promocode for room
+                Set promocode for room
                 <input id="roomCode" type="text">
                 <br/><br/>
     
